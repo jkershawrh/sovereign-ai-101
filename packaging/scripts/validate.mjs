@@ -96,6 +96,7 @@ export async function validatePackaging() {
   for (const file of ['Containerfile', 'Containerfile.service']) {
     const text = await readFile(root + file, 'utf8');
     assert.match(text, /ARG NODE_IMAGE=\S+@sha256:[a-f0-9]{64}/);
+    assert.match(text, /rm -rf \/usr\/local\/lib\/node_modules\/npm/);
     assert.match(text, /USER 1001:0/); assert.match(text, /org.opencontainers.image.revision="\$\{SOURCE_REVISION\}"/);
     assert.match(text, /SOVEREIGN_SOURCE=REHEARSAL DELIVERY_STATUS=development/);
     assert.match(text, /HEALTHCHECK/); assert.ok(!/COPY\s+\.\s+\./.test(text));

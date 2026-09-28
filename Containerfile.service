@@ -11,6 +11,9 @@ RUN npm run build:server
 FROM ${NODE_IMAGE}
 ARG SOURCE_REVISION
 ARG SOURCE_DIRTY=true
+RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack \
+    && rm -f /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack \
+       /usr/local/bin/pnpm /usr/local/bin/pnpx /usr/local/bin/yarn /usr/local/bin/yarnpkg
 LABEL org.opencontainers.image.title="Sovereign AI 101 governed rehearsal service" \
       org.opencontainers.image.revision="${SOURCE_REVISION}" \
       io.sovereign.source-dirty="${SOURCE_DIRTY}" \
