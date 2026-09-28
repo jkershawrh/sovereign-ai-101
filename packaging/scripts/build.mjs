@@ -20,7 +20,9 @@ const context = await stageContext(process.cwd());
 try {
 for (const [role, file] of [['presentation', 'Containerfile'], ['rehearsal', 'Containerfile.service']]) {
   const image = `localhost/sovereign-ai-101-${role}:development-${revision.slice(0, 12)}`;
-  run(engine, ['build', '--platform', 'linux/amd64', '--format', 'docker', '--build-arg', `SOURCE_REVISION=${revision}`,
+  // Release identity is carried in image labels. Disable the layer cache so a
+  // previously built LABEL layer can never survive a source revision change.
+  run(engine, ['build', '--no-cache', '--platform', 'linux/amd64', '--format', 'docker', '--build-arg', `SOURCE_REVISION=${revision}`,
     '--build-arg', `SOURCE_DIRTY=${dirty}`, '-f', context + '/' + file, '-t', image, context].filter((x, i, a) => engine === 'podman' || (x !== '--format' && a[i - 1] !== '--format')));
   const inspected = JSON.parse(run(engine, ['image', 'inspect', image], true))[0];
   if (inspected.Os !== 'linux' || inspected.Architecture !== 'amd64' || inspected.Config.User !== '1001:0' ||

@@ -91,6 +91,8 @@ export async function resources() {
 }
 export async function validatePackaging() {
   validateResources(await resources(), { allowPlaceholders: true });
+  const buildScript = await readFile(root + 'packaging/scripts/build.mjs', 'utf8');
+  assert.match(buildScript, /\['build', '--no-cache'/);
   for (const file of ['Containerfile', 'Containerfile.service']) {
     const text = await readFile(root + file, 'utf8');
     assert.match(text, /ARG NODE_IMAGE=\S+@sha256:[a-f0-9]{64}/);
