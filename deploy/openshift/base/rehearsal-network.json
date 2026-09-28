@@ -1,0 +1,43 @@
+{
+  "apiVersion": "networking.k8s.io/v1",
+  "kind": "NetworkPolicy",
+  "metadata": {
+    "name": "sovereign-rehearsal-network",
+    "labels": {
+      "app.kubernetes.io/part-of": "sovereign-ai-101",
+      "sovereign.ai/source": "REHEARSAL",
+      "sovereign.ai/delivery": "development"
+    }
+  },
+  "spec": {
+    "podSelector": {
+      "matchLabels": {
+        "app.kubernetes.io/name": "sovereign-rehearsal"
+      }
+    },
+    "policyTypes": [
+      "Ingress",
+      "Egress"
+    ],
+    "ingress": [
+      {
+        "from": [
+          {
+            "podSelector": {
+              "matchLabels": {
+                "app.kubernetes.io/name": "sovereign-presentation"
+              }
+            }
+          }
+        ],
+        "ports": [
+          {
+            "protocol": "TCP",
+            "port": 8787
+          }
+        ]
+      }
+    ],
+    "egress": []
+  }
+}

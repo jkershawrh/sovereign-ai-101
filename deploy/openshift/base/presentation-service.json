@@ -1,0 +1,26 @@
+{
+  "apiVersion": "v1",
+  "kind": "Service",
+  "metadata": {
+    "name": "sovereign-presentation",
+    "labels": {
+      "app.kubernetes.io/part-of": "sovereign-ai-101",
+      "sovereign.ai/source": "REHEARSAL",
+      "sovereign.ai/delivery": "development",
+      "app.kubernetes.io/name": "sovereign-presentation"
+    }
+  },
+  "spec": {
+    "type": "ClusterIP",
+    "selector": {
+      "app.kubernetes.io/name": "sovereign-presentation"
+    },
+    "ports": [
+      {
+        "name": "http",
+        "port": 8080,
+        "targetPort": "http"
+      }
+    ]
+  }
+}

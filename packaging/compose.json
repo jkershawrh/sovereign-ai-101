@@ -1,0 +1,96 @@
+{
+  "services": {
+    "rehearsal": {
+      "image": "${REHEARSAL_IMAGE:?Run packaging/scripts/build.mjs first}",
+      "platform": "linux/amd64",
+      "pull_policy": "never",
+      "read_only": true,
+      "user": "1001:0",
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 100,
+      "mem_limit": "256m",
+      "cpus": 0.5,
+      "environment": {
+        "SOVEREIGN_SOURCE": "REHEARSAL",
+        "DELIVERY_STATUS": "development",
+        "PORT": "8787"
+      },
+      "networks": [
+        "rehearsal"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "node",
+          "packaging/runtime/healthcheck.mjs"
+        ],
+        "interval": "5s",
+        "timeout": "4s",
+        "retries": 12
+      },
+      "labels": {
+        "app.kubernetes.io/part-of": "sovereign-ai-101",
+        "sovereign.ai/source": "REHEARSAL",
+        "sovereign.ai/delivery": "development"
+      }
+    },
+    "presentation": {
+      "image": "${PRESENTATION_IMAGE:?Run packaging/scripts/build.mjs first}",
+      "platform": "linux/amd64",
+      "pull_policy": "never",
+      "read_only": true,
+      "user": "1001:0",
+      "cap_drop": [
+        "ALL"
+      ],
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "pids_limit": 100,
+      "mem_limit": "256m",
+      "cpus": 0.5,
+      "environment": {
+        "SOVEREIGN_SOURCE": "REHEARSAL",
+        "DELIVERY_STATUS": "development",
+        "PORT": "8080",
+        "SERVICE_URL": "http://rehearsal:8787"
+      },
+      "networks": [
+        "rehearsal"
+      ],
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "node",
+          "packaging/runtime/healthcheck.mjs"
+        ],
+        "interval": "5s",
+        "timeout": "4s",
+        "retries": 12
+      },
+      "labels": {
+        "app.kubernetes.io/part-of": "sovereign-ai-101",
+        "sovereign.ai/source": "REHEARSAL",
+        "sovereign.ai/delivery": "development"
+      },
+      "ports": [
+        "127.0.0.1:${PRESENTATION_PORT:-8080}:8080"
+      ],
+      "depends_on": {
+        "rehearsal": {
+          "condition": "service_healthy"
+        }
+      }
+    }
+  },
+  "networks": {
+    "rehearsal": {
+      "internal": true
+    }
+  }
+}

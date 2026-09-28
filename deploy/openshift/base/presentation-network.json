@@ -1,0 +1,95 @@
+{
+  "apiVersion": "networking.k8s.io/v1",
+  "kind": "NetworkPolicy",
+  "metadata": {
+    "name": "sovereign-presentation-network",
+    "labels": {
+      "app.kubernetes.io/part-of": "sovereign-ai-101",
+      "sovereign.ai/source": "REHEARSAL",
+      "sovereign.ai/delivery": "development"
+    }
+  },
+  "spec": {
+    "podSelector": {
+      "matchLabels": {
+        "app.kubernetes.io/name": "sovereign-presentation"
+      }
+    },
+    "policyTypes": [
+      "Ingress",
+      "Egress"
+    ],
+    "ingress": [
+      {
+        "from": [
+          {
+            "namespaceSelector": {
+              "matchLabels": {
+                "network.openshift.io/policy-group": "ingress"
+              }
+            }
+          }
+        ],
+        "ports": [
+          {
+            "protocol": "TCP",
+            "port": 8080
+          }
+        ]
+      }
+    ],
+    "egress": [
+      {
+        "to": [
+          {
+            "podSelector": {
+              "matchLabels": {
+                "app.kubernetes.io/name": "sovereign-rehearsal"
+              }
+            }
+          }
+        ],
+        "ports": [
+          {
+            "protocol": "TCP",
+            "port": 8787
+          }
+        ]
+      },
+      {
+        "to": [
+          {
+            "namespaceSelector": {
+              "matchLabels": {
+                "kubernetes.io/metadata.name": "openshift-dns"
+              }
+            },
+            "podSelector": {
+              "matchLabels": {
+                "dns.operator.openshift.io/daemonset-dns": "default"
+              }
+            }
+          }
+        ],
+        "ports": [
+          {
+            "protocol": "UDP",
+            "port": 53
+          },
+          {
+            "protocol": "UDP",
+            "port": 5353
+          },
+          {
+            "protocol": "TCP",
+            "port": 53
+          },
+          {
+            "protocol": "TCP",
+            "port": 5353
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -4,25 +4,25 @@ FROM ${NODE_IMAGE} AS build
 WORKDIR /build
 COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts
-COPY index.html tsconfig*.json vite.config.ts ./
-COPY src ./src
-COPY public ./public
+COPY server ./server
 COPY contracts ./contracts
-RUN npm run build
+RUN npm run build:server
 
 FROM ${NODE_IMAGE}
 ARG SOURCE_REVISION
 ARG SOURCE_DIRTY=true
-LABEL org.opencontainers.image.title="Sovereign AI 101 presentation" \
+LABEL org.opencontainers.image.title="Sovereign AI 101 governed rehearsal service" \
       org.opencontainers.image.revision="${SOURCE_REVISION}" \
       io.sovereign.source-dirty="${SOURCE_DIRTY}" \
       io.sovereign.delivery="development" \
       io.sovereign.source="REHEARSAL"
 WORKDIR /app
-COPY --from=build /build/dist ./dist
-COPY packaging/runtime/config.mjs packaging/runtime/healthcheck.mjs packaging/runtime/presentation.mjs ./packaging/runtime/
-ENV NODE_ENV=production PORT=8080 SOVEREIGN_SOURCE=REHEARSAL DELIVERY_STATUS=development SERVICE_URL=http://rehearsal:8787
+COPY --from=build /build/server/dist/server ./server/dist/server
+COPY --from=build /build/server/dist/contracts/governed-inference.js ./server/dist/contracts/governed-inference.js
+COPY package.json ./package.json
+COPY packaging/runtime/config.mjs packaging/runtime/healthcheck.mjs packaging/runtime/service.mjs ./packaging/runtime/
+ENV NODE_ENV=production PORT=8787 SOVEREIGN_SOURCE=REHEARSAL DELIVERY_STATUS=development
 USER 1001:0
-EXPOSE 8080
+EXPOSE 8787
 HEALTHCHECK --interval=10s --timeout=4s --start-period=10s --retries=3 CMD ["node", "packaging/runtime/healthcheck.mjs"]
-CMD ["node", "packaging/runtime/presentation.mjs"]
+CMD ["node", "packaging/runtime/service.mjs"]

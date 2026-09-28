@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - presentation.json
+  - presentation-service.json
+  - rehearsal.json
+  - rehearsal-service.json
+  - route.json
+  - deny-all.json
+  - presentation-network.json
+  - rehearsal-network.json

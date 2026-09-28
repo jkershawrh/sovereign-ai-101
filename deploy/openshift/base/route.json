@@ -1,0 +1,26 @@
+{
+  "apiVersion": "route.openshift.io/v1",
+  "kind": "Route",
+  "metadata": {
+    "name": "sovereign-presentation",
+    "labels": {
+      "app.kubernetes.io/part-of": "sovereign-ai-101",
+      "sovereign.ai/source": "REHEARSAL",
+      "sovereign.ai/delivery": "development"
+    }
+  },
+  "spec": {
+    "to": {
+      "kind": "Service",
+      "name": "sovereign-presentation"
+    },
+    "port": {
+      "targetPort": "http"
+    },
+    "tls": {
+      "termination": "edge",
+      "insecureEdgeTerminationPolicy": "Redirect"
+    },
+    "wildcardPolicy": "None"
+  }
+}
