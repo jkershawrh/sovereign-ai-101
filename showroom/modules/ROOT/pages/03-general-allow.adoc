@@ -1,0 +1,35 @@
+= General allow
+:page-stage-id: 03-general-allow
+:page-duration-minutes: 5
+
+include::partial$status.adoc[]
+
+*Minutes 4–9 of 36 · 5 minutes · REHEARSAL*
+
+== Objective
+
+Distinguish permission to dispatch from evidenced completion.
+
+== Learner actions
+
+. Inspect case `general` and its proposed request body for `POST /api/route`:
+
+[source,json]
+----
+{"request_id":"rehearsal-general","prompt":"What is the general framework for AI governance?","max_tokens":100}
+----
+
+. Read the fixture result: HTTP 200, classification `general`, decision `allow`, reason `local_policy_allowed`, execution `completed`, source `rehearsal`.
+. Find both `router.general.routed_local` and `router.inference.completed`. Match their IDs/hashes to entries, preserving request, session and correlation IDs.
+. Observe the simulated dispatch count of 1. The response is explicitly authored placeholder text, not a Granite answer. Its model/artifact fields are fictional examples and cannot replace runtime identity evidence.
+. Record both receipts in the worksheet, including positions and simulated write times.
+
+*Blocked live procedure:* submit the supplied fictional prompt only after G01–G10 qualification. The contract requires a decision receipt before dispatch and an acknowledged completion receipt before text release.
+One user message, at most 2,000 prompt characters and at most 100 output tokens are proposed bounds, not claims about the current API.
+Retry the same uncertain request with the same ID; a new experiment gets a new ID. Changed input under an existing ID must be rejected.
+
+== Learner checkpoint
+
+*Pass when:* you identify two linked phases and answer “the configured deterministic boundary, using the human-approved policy, permitted dispatch.” A `routed_local` record alone is not completion evidence.
+
+Next: xref:04-sensitive-allow.adoc[Sensitive allow].

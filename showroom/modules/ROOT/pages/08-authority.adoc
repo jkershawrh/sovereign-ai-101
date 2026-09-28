@@ -1,0 +1,27 @@
+= Explain authority
+:page-stage-id: 08-authority
+:page-duration-minutes: 3
+
+include::partial$status.adoc[]
+
+*Minutes 31–34 of 36 · 3 minutes · REHEARSAL*
+
+== Objective
+
+Explain who decides and what each piece of evidence can establish.
+
+== Learner actions
+
+. Explain the four outcomes in one minute, always prefacing fixture results with “In this rehearsal example”.
+. Name the policy owner who approves rules and permitted context; the platform operator who enforces them, proves placement and recovers failures; and the business owner who approves a bounded next workload.
+. Explain that Granite produces text after authorization. It cannot change policy, choose destinations, authorize infrastructure or accept its own answer.
+. Record one next workload, the evidence it would require and its human approver role. Do not record a real sensitive prompt.
+
+The ledger stores and checks records; it grants no governance authority. A green chain result does not approve production use. Pattern scores are configured values, not measured model quality.
+Decision, execution and evidence remain separate: allow can precede failed inference, and an enforced deny can lack acknowledged evidence.
+
+== Learner checkpoint
+
+*Pass when:* your worksheet contains the ownership explanation and a conditional next-workload proposal with an approver. This is a rehearsal learning checkpoint, not deployment approval or certification.
+
+Next: xref:09-cleanup-close.adoc[Cleanup and close].

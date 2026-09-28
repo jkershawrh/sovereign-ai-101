@@ -1,0 +1,14 @@
+site:
+  title: Sovereign AI 101 — Verify Local Inference Governance
+  start_page: sovereign-ai-101::index.adoc
+content:
+  sources:
+    - url: .
+      start_path: showroom
+ui:
+  bundle:
+    url: https://github.com/rhpds/rhdp_showroom_theme/releases/download/latest/ui-bundle.zip
+    snapshot: true
+  supplemental_files: ./showroom/supplemental-ui
+output:
+  dir: ./showroom/build/site

@@ -1,0 +1,37 @@
+# Sanitized learner declaration, not deployment configuration. No credentials.
+schema_version: sovereign-ai-101-profile/v1
+source: rehearsal
+live_completion: false
+qualification: blocked
+session_id: null
+worksheet_created_at: null # actual edit date; never overwrite fixture scenario times
+source_revision: null
+submodule_revisions: {}
+source_dirty: null
+deployment_mode: null
+effective_local_backend_evidence_ref: null # sanitized reference only, no tokenized URLs
+image_digest: null
+model_artifact_digest: null
+model_alias: null
+serving_device: null
+pod_node_placement_evidence_ref: null
+cpu_vendor_evidence_ref: null
+policy_digest: null
+rules_digest: null
+runtime_collected_at: null
+policy_owner_role: policy-owner
+operator_role: platform-operator
+next_workload_approver_role: business-owner
+release_gates:
+  G01: blocked
+  G02: blocked
+  G03: blocked
+  G04: blocked
+  G05: blocked
+  G06: blocked
+  G07: blocked
+  G08: blocked
+  G09: blocked
+  G10: blocked
+cleanup_report_ref: null
+export_exception: sanitized learner worksheet only

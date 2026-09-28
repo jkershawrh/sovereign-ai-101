@@ -1,0 +1,130 @@
+.so-app { min-height: 100dvh; background:#151515; color:#f5f5f5; font-family:'Red Hat Text',sans-serif; }
+.so-app * { box-sizing:border-box; }
+.so-app button { font:500 14px 'Red Hat Text'; background:transparent; color:#eee; border:1px solid #545454; border-radius:4px; padding:11px 17px; cursor:pointer; }
+.so-app button:hover:not(:disabled) { border-color:#00aeef; background:#223038; }
+.so-app button:focus-visible { outline:3px solid #00aeef; outline-offset:4px; }
+.so-app button:disabled { cursor:default; opacity:.48; }
+.so-app button.so-primary { background:#007aab; border-color:#00aeef; color:#fff; }
+.so-app button.so-text-button { border-color:transparent; padding-left:0; color:#bbb; }
+.so-header { height:84px; padding:0 4vw; display:flex; align-items:center; gap:30px; border-bottom:1px solid #343434; }
+.so-header .so-brand { border:0; padding:0; }
+.so-header .brand-lockup { margin:0; }
+.so-header .brand-lockup img { max-width:none; height:30px; width:auto; }
+.so-header .brand-lockup img:last-child { height:24px; }
+.so-header-title { font:12px 'Red Hat Mono'; letter-spacing:.14em; color:#aaa; }
+.so-header nav { margin-left:auto; display:flex; align-items:center; gap:8px; }
+.so-header nav button { padding:8px 11px; border-color:transparent; }
+.so-header nav button.so-dot { width:32px; padding:6px 0; font:12px 'Red Hat Mono'; border-bottom:2px solid #444; border-radius:0; }
+.so-header nav button.active { border-color:#00aeef; color:#00aeef; }
+.so-stage { max-width:1800px; margin:auto; height:calc(100dvh - 130px); padding:32px 4vw 18px; display:flex; flex-direction:column; gap:22px; position:relative; }
+.so-heading { flex:none; }
+.so-eyebrow { font:700 12px 'Red Hat Mono'; letter-spacing:.16em; text-transform:uppercase; color:#00aeef; }
+.so-app h1,.so-app h2,.so-app h3 { font-family:'Red Hat Display'; letter-spacing:-.025em; }
+.so-heading h1 { font-size:clamp(30px,3vw,54px); line-height:1.12; margin:10px 0 0; }
+.so-app p { line-height:1.5; color:#d0d0d0; margin:10px 0; }
+.so-app small,.so-small { font-size:13px; line-height:1.5; color:#aaa; }
+.so-app code { font:12px/1.5 'Red Hat Mono'; overflow-wrap:anywhere; }
+.so-label { color:#aaa; font:700 11px 'Red Hat Mono'; text-transform:uppercase; letter-spacing:.08em; }
+.so-opening { flex:1; display:flex; flex-direction:column; justify-content:center; padding-bottom:45px; animation:so-reveal .24s ease-out; }
+.so-huge { font:700 clamp(65px,7vw,126px)/1.04 'Red Hat Display'; max-width:1300px; letter-spacing:-.055em; }
+.so-opening p { font-size:clamp(19px,2vw,28px); max-width:800px; margin:28px 0 36px; }
+.so-opening-trail { display:flex; gap:30px; margin-bottom:36px; }
+.so-opening-trail span { border-top:3px solid #555; padding-top:14px; width:160px; color:#999; }
+.so-opening-trail .active { border-color:#ee0000; color:#fff; }
+.so-opening .so-text-button { align-self:start; }
+.so-reframe { flex:1; display:grid; grid-template-columns:1.1fr 1fr; gap:7vw; align-items:center; }
+.so-reframe h1 { font-size:clamp(68px,7.2vw,128px); line-height:1; margin:0; }
+.so-app em { color:#00aeef; font-style:normal; }
+.so-reframe p { font-size:27px; }
+.so-reframe ol { padding:0; list-style:none; margin:28px 0; }
+.so-reframe li { padding:13px 0; border-bottom:1px solid #444; color:#ccc; font-size:23px; }
+.so-reframe li strong { display:inline-block; color:white; width:130px; }
+.so-architecture { flex:1; display:flex; flex-direction:column; justify-content:center; gap:32px; }
+.so-question { min-height:285px; position:relative; padding-right:270px; }
+.so-question h2 { font-size:clamp(32px,3vw,52px); margin:12px 0 18px; }
+.so-question h3 { color:#00aeef; font-size:25px; margin:10px 0; }
+.so-question p { max-width:900px; font-size:18px; }
+.so-question button { position:absolute; right:0; bottom:28px; }
+.so-question .so-pause { margin-top:36px; color:#888; }
+.so-map-caption { font:10px 'Red Hat Mono'; color:#aaa; letter-spacing:.07em; margin-bottom:12px; }
+.so-path { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; }
+.so-node { border:1px solid #494949; border-top:3px solid #666; padding:16px; display:flex; flex-direction:column; gap:12px; min-height:178px; position:relative; }
+.so-node:not(:last-child)::after { content:'→'; position:absolute; right:-19px; top:45%; color:#777; }
+.so-node.selected { border-color:#00aeef; background:#17252b; }
+.so-node.concealed { border-style:dashed; align-items:center; justify-content:center; color:#777; }
+.so-node-number { font:10px 'Red Hat Mono'; text-transform:uppercase; color:#00aeef; }
+.so-node strong { font:700 20px/1.2 'Red Hat Display'; }
+.so-node code { color:#bcbcbc; font-size:11px; }
+.so-node small { font-size:11px; margin-top:auto; }
+.so-unrevealed { font-size:13px; }
+.so-map-foot { display:flex; justify-content:space-between; gap:20px; font-size:11px; color:#aaa; margin-top:12px; }
+.so-proof { display:flex; flex:1; flex-direction:column; gap:18px; min-height:0; }
+.so-connect { display:flex; align-items:center; gap:14px; font-size:12px; color:#aaa; flex-wrap:wrap; min-height:40px; }
+.so-tag { font:10px 'Red Hat Mono'; color:#e2c682; border:1px solid #75623d; padding:6px 8px; text-transform:uppercase; display:inline-block; width:fit-content; }
+.so-evidence-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
+.so-app button.so-evidence { display:flex; flex-direction:column; align-items:start; gap:7px; text-align:left; padding:16px 20px; background:#202020; border-color:#444; opacity:1; min-width:0; }
+.so-app button.so-evidence.selected { border-color:#00aeef; }
+.so-evidence strong { font:700 27px 'Red Hat Display'; text-transform:capitalize; }
+.so-evidence strong.allow { color:#b8d89c; }.so-evidence strong.deny { color:#ff9a8f; }.so-evidence strong.abstain { color:#edca84; }
+.so-evidence > span:not(.so-label):not(.so-tag) { font-size:13px; color:#bbb; }
+.so-evidence small { font-size:12px; }
+.so-proof-bottom { display:grid; grid-template-columns:minmax(0,1fr) 245px; gap:24px; flex:1; min-height:0; }
+.so-detail { padding:18px 22px; border-left:3px solid #00aeef; background:#1c1c1c; min-width:0; display:flex; flex-direction:column; }
+.so-detail h3 { font-size:26px; margin:9px 0 0; }
+.so-detail p { font-size:16px; }
+.so-detail small { font-size:12px; }
+.so-detail-meta { border-top:1px solid #3c3c3c; padding-top:10px; display:flex; justify-content:space-between; gap:10px; margin-top:auto; color:#aaa; font:10px 'Red Hat Mono'; }
+.so-receipt-lines { display:flex; flex-direction:column; gap:5px; margin-bottom:10px; }
+.so-run-controls { display:flex; flex-direction:column; justify-content:center; gap:9px; }
+.so-run-controls button { font-size:13px; padding:9px 12px; }
+.so-policy { flex:1; display:flex; flex-direction:column; justify-content:center; gap:28px; }
+.so-tradeoff { display:grid; grid-template-columns:1fr 1fr; gap:45px; }
+.so-tradeoff article { border-top:3px solid #ee0000; padding-top:18px; }
+.so-tradeoff article:last-child { border-color:#00aeef; }
+.so-tradeoff h2 { font-size:clamp(36px,3.7vw,60px); line-height:1.1; margin:18px 0; }
+.so-tradeoff article:first-child em { color:#ff8b7d; }
+.so-tradeoff p { max-width:650px; font-size:19px; }
+.so-policy-action { display:flex; flex-wrap:wrap; align-items:center; gap:20px; }
+.so-policy-action .so-connect { width:100%; }
+.so-policy-action .so-evidence { min-width:330px; }
+.so-mechanism { border-left:3px solid #00aeef; padding:12px 24px; background:#202020; }
+.so-mechanism h3 { font-size:25px; margin:7px 0; }
+.so-payoff { flex:1; display:flex; flex-direction:column; justify-content:center; gap:26px; }
+.so-payoff-statement { font:700 clamp(28px,2.6vw,42px)/1.2 'Red Hat Display'; max-width:1200px; }
+.so-payoff-statement span { display:block; font:13px 'Red Hat Mono'; color:#e2c682; margin-top:14px; }
+.so-payoff-lower { display:grid; grid-template-columns:1fr 1fr; gap:45px; }
+.so-payoff h3 { font-size:25px; margin:0 0 12px; }
+.so-payoff p { font-size:17px; max-width:650px; }
+.so-handoff { border-left:2px solid #00aeef; padding-left:28px; }
+.so-handoff h3 { margin-top:10px; }
+.so-final-actions { display:flex; gap:20px; }
+.so-footer { height:46px; display:flex; justify-content:space-between; padding:0 4vw; align-items:center; color:#9c9c9c; font:10px 'Red Hat Mono'; border-top:1px solid #333; }
+.so-status,.so-error { position:absolute; bottom:10px; left:4vw; right:4vw; padding:12px 18px; border:1px solid #b7924b; background:#272219; font-size:13px; z-index:4; }
+.so-presenter { position:fixed; bottom:50px; left:4vw; z-index:9; width:min(600px,92vw); background:#222; border:1px solid #00aeef; padding:22px; display:grid; gap:14px; box-shadow:0 8px 40px #000; }
+.so-presenter span { font-size:16px; line-height:1.5; }.so-presenter button { justify-self:start; }
+.so-dialog { position:fixed; z-index:10; inset:0; margin:auto; width:min(800px,90vw); height:fit-content; max-height:90dvh; overflow:auto; padding:40px; background:#202020; color:white; border:1px solid #00aeef; box-shadow:0 0 0 100vmax #000c; }
+.so-dialog h2 { font-size:38px; margin:20px 0; }.so-dialog p { font-size:18px; }.so-dialog > div { display:flex; gap:15px; margin-top:25px; }
+.so-close { margin:auto 0; }.so-close h1 { font-size:clamp(50px,6vw,100px); line-height:1.05; margin:30px 0; }.so-close p { max-width:760px; }
+@keyframes so-reveal { from { opacity:0; transform:translateY(8px) } to { opacity:1; transform:translateY(0) } }
+@media (max-height:950px) and (min-width:901px) {
+.so-stage { gap:18px; padding-top:24px; }.so-header { height:72px; }.so-stage { height:calc(100dvh - 118px); }
+.so-node { min-height:147px; padding:12px; gap:9px; }.so-node strong { font-size:18px; }
+.so-proof { gap:13px; }.so-app button.so-evidence { padding:12px 16px; gap:5px; }.so-evidence strong { font-size:24px; }
+.so-detail { padding:14px 18px; }.so-detail h3 { font-size:23px; }.so-detail p { font-size:15px; margin:8px 0; }.so-detail-meta { padding-top:7px; font-size:9px; }
+.so-question { min-height:280px; }.so-tradeoff p { font-size:17px; }.so-policy { gap:22px; }.so-payoff { gap:21px; }
+}
+@media (max-width:900px) {
+.so-header { height:auto; min-height:80px; padding:12px 5vw; flex-wrap:wrap; gap:12px; }.so-header-title { font-size:10px; margin-left:auto; }.so-header .brand-lockup img { height:24px; }.so-header .brand-lockup img:last-child { height:20px; }
+.so-header nav { width:100%; justify-content:space-between; gap:0; }.so-header nav button { padding:7px; }.so-header nav button.so-dot { width:24px; }
+.so-stage { height:auto; min-height:calc(100dvh - 185px); padding:26px 6vw 35px; gap:28px; }.so-heading h1 { font-size:36px; }
+.so-huge { font-size:63px; }.so-opening { padding:45px 0; min-height:65vh; }.so-opening-trail { gap:12px; }.so-opening-trail span { width:85px; }
+.so-reframe { grid-template-columns:1fr; gap:30px; }.so-reframe h1 { font-size:66px; }.so-reframe p { font-size:22px; }.so-reframe li { font-size:20px; }
+.so-question { padding:0; min-height:320px; }.so-question h2 { font-size:35px; }.so-question h3 { font-size:24px; }.so-question p { font-size:17px; }.so-question button { position:static; margin-top:20px; }
+.so-path { grid-template-columns:1fr; gap:20px; }.so-node { min-height:125px; }.so-node:not(:last-child)::after { content:'↓'; top:auto; bottom:-21px; right:50%; }.so-node.concealed { min-height:65px; }
+.so-map-foot { flex-direction:column; }.so-map-caption { line-height:1.6; }.so-evidence-grid { grid-template-columns:1fr; }.so-proof-bottom { grid-template-columns:1fr; }.so-detail { min-height:260px; }.so-detail-meta { flex-direction:column; gap:7px; margin-top:20px; }.so-run-controls { margin-bottom:20px; }
+.so-tradeoff,.so-payoff-lower { grid-template-columns:1fr; gap:30px; }.so-tradeoff h2 { font-size:38px; }.so-policy-action { align-items:stretch; }.so-policy-action .so-evidence { min-width:0; width:100%; }.so-mechanism { padding:14px; }.so-mechanism h3 { font-size:23px; }
+.so-payoff-statement { font-size:30px; }.so-payoff-statement span { line-height:1.7; }.so-handoff { padding-left:18px; }.so-final-actions { flex-wrap:wrap; }
+.so-footer { height:auto; min-height:58px; padding:14px 6vw; gap:15px; line-height:1.6; }.so-footer > span:first-child { max-width:190px; }.so-footer > span:last-child { white-space:nowrap; }
+.so-error,.so-status { position:static; }.so-dialog { padding:25px; }.so-dialog h2 { font-size:30px; }.so-dialog > div { flex-direction:column; }
+}
+@media (prefers-reduced-motion:reduce) { .so-app *, .so-app *::before, .so-app *::after { animation:none!important; transition:none!important; } }

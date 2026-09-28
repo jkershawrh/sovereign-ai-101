@@ -1,0 +1,14 @@
+schema_version: sovereign-ai-101-showroom-package/v1
+name: sovereign-ai-101
+content_root: showroom
+component_descriptor: showroom/antora.yml
+playbook: site.yml
+learning_source: showroom/modules/ROOT/pages
+journey: content-101/journey.json
+assets: content-101
+mode: rehearsal-only
+duration_minutes: 36
+recovery_allowance_minutes: 4
+live_completion: false
+live_qualification: blocked-on-G01-G10
+validation: npm --prefix showroom run check

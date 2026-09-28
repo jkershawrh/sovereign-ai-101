@@ -1,0 +1,9 @@
+node_modules/
+showroom/node_modules/
+dist/
+server/dist/
+showroom/build/
+test-results/
+playwright-report/
+*.log
+.DS_Store

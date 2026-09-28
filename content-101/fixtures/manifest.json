@@ -1,0 +1,8 @@
+{
+  "schema_version": "sovereign-ai-101-fixture-manifest/v1",
+  "source": "rehearsal",
+  "purpose": "Detect changes to shipped teaching bytes; not ledger verification or release qualification.",
+  "files": {
+    "journey.rehearsal.json": "a2b7c6eea78072915814e98f0635e9e9a40259532a901b2f63307b43e8ee7ad8"
+  }
+}

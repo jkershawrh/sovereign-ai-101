@@ -1,0 +1,30 @@
+= Sovereign AI 101 Showroom learner package
+
+REHEARSAL ONLY. The native Antora component implements ten ordered learner pages totaling 36 minutes, with up to four minutes of recovery. All live release gates remain blocked.
+
+== Build and validate
+
+From the repository root:
+
+[source,bash]
+----
+npm ci --prefix showroom
+npm --prefix showroom run check
+----
+
+This runs content checks, fixture integrity/relationship checks, negative controls, Antora and rendered local-link/anchor checks. The first build requires network access for the RHDP Showroom UI bundle. Antora versions are pinned in the package lock; the reference theme uses its published latest bundle, so theme changes may require a fresh visual check.
+
+The build wrapper always creates a temporary Git snapshot of only this component and the playbook, including current uncommitted edits. It removes the snapshot on success or failure. It never initializes or commits the parent repository. The site is written to `showroom/build/site` (ignored), inside this task's allowed scope.
+
+== Structure and ownership
+
+`antora.yml`, native AsciiDoc modules, ordered nav, page pagination, RHDP theme playbook and supplemental favicon follow the structural pattern of `agentic-scale-501/showroom`; no domain content was copied.
+`content-101/journey.json` owns stage order and timing; native pages own learner prose. `content-101/fixtures`, `templates` and `reference` own downloads; their Antora attachment copies must be byte-identical.
+
+The four design inputs are `demo-blueprint.yaml`, `story.brief.yaml`, `docs/sovereign-ai-101-lab-plan.md` and `docs/journey-acceptance-matrix.md`. They are unchanged by this package.
+
+== Validator limits
+
+`node content-101/tools/rehearsal-check.mjs` checks the teaching bundle. `--live` is refused with a nonzero exit. The validator never invokes an API, infers runtime readiness, validates a ledger canonical hash, runs cleanup or grants live completion. Simulated chain booleans illustrate required evidence only.
+
+Admission, local model/CPU evidence, all four real cases, fresh exact receipts, actual nonempty-chain verification, ownership explanation and scoped cleanup must be qualified independently against G01–G10. The package excludes attestation, training, benchmark, compliance, sovereignty-outcome and certification claims and supplies no deployment integration.

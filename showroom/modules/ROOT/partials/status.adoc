@@ -1,0 +1,8 @@
+[IMPORTANT]
+====
+*Implemented contract in this package:* learner instructions, static fixture shape checks, and a rehearsal-only validator. These are not deployed runtime controls.
+
+*REHEARSAL evidence:* authored examples with simulated identifiers, hashes, responses and scenario times. `collected_at: null` means no live observation. Fixture validation cannot grant live completion.
+
+*Blocked live steps:* runtime execution and live completion remain blocked pending current G01–G10 qualification. No cluster, policy fault, inference or live ledger verification is performed by these pages.
+====

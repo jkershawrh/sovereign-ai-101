@@ -1,0 +1,28 @@
+= Preflight and bounded claim
+:page-stage-id: 00-preflight
+:page-duration-minutes: 1
+
+include::partial$status.adoc[]
+
+*Minutes 0–1 of 36 · 1 minute · REHEARSAL*
+
+== Objective
+
+State the narrow claim and distinguish this rehearsal from a qualified live session.
+
+== Learner actions
+
+. Open the worksheet and leave `live_completion: false`. Record this run as REHEARSAL, with your actual worksheet edit date separate from fixture dates.
+. Read the profile: session `rehearsal-session-101` is fictional; no endpoint or credentials are supplied. The downloaded blank profile is not deployment configuration.
+. Name the policy owner, platform operator and business approver by role. These are proposed roles, not assigned people.
+. Read the admission record: every release gate is blocked. Do not connect to an environment or infer a ready seat from a rendered page.
+
+The future live admission requires an authenticated, disposable, tenant-isolated seat, a bounded request console, session-authorized read-only evidence, a scoped fault control and a qualified spare seat.
+Learners receive neither cluster administration nor ledger write access.
+
+== Learner checkpoint
+
+*Pass when:* you can say “I am inspecting authored examples; this is not evidence of a live run.”
+Record the bounded claim as conditional and name the three human roles. Reading this page does not satisfy G01–G10.
+
+Next: xref:01-local-evidence.adoc[Inspect local model and CPU evidence].

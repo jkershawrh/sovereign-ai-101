@@ -1,0 +1,27 @@
+= Capture baseline receipts
+:page-stage-id: 02-baseline
+:page-duration-minutes: 1
+
+include::partial$status.adoc[]
+
+*Minutes 3–4 of 36 · 1 minute · REHEARSAL*
+
+== Objective
+
+Prevent old or another learner’s receipts from satisfying this session.
+
+== Learner actions
+
+. Inspect `baseline`: the simulated session starts at `2000-01-01T00:00:00Z`, and the baseline is captured at scenario minute 3. These are teaching-clock times, not observations made today.
+. Copy the five type-chain tips, their entry IDs, hashes and positions into the worksheet baseline section. All tips are at position 1.
+. Identify the six expected new receipts: two general-allow phases, two sensitive-allow phases, one denial and one abstention.
+. Clear any prior worksheet result before proceeding. Reusing a presenter’s receipts is not learner evidence.
+
+*Blocked live procedure:* before any request, record actual session start, server baseline time, known entry IDs and per-type tips through the authenticated read-only viewer. Use newly allocated session-bound IDs, not prompt markers.
+The internal gateway supports filtered reads, but the reviewed public proxy does not establish session-authorized forwarding of filters.
+
+== Learner checkpoint
+
+*Pass when:* baseline IDs are distinct from all six later receipt IDs, and you can explain why a timestamp or a larger entry count alone cannot prove freshness. This rehearses G06.
+
+Next: xref:03-general-allow.adoc[General allow].

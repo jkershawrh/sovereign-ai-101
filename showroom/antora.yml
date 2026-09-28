@@ -1,0 +1,12 @@
+name: sovereign-ai-101
+title: Sovereign AI 101 — Verify Local Inference Governance
+version: ~
+start_page: ROOT:index.adoc
+nav:
+  - modules/ROOT/nav.adoc
+asciidoc:
+  attributes:
+    experimental: true
+    page-pagination: true
+    source-highlighter: highlight.js
+    lab-mode: REHEARSAL

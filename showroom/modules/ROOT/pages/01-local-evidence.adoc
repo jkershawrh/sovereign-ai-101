@@ -1,0 +1,31 @@
+= Inspect local model and CPU evidence
+:page-stage-id: 01-local-evidence
+:page-duration-minutes: 2
+
+include::partial$status.adoc[]
+
+*Minutes 1–3 of 36 · 2 minutes · REHEARSAL*
+
+== Objective
+
+Separate local model identity and CPU placement from a model name in a response.
+
+== Learner actions
+
+. Inspect `runtime_evidence` in the evidence bundle. Its `qualification` is `blocked`; observed endpoint, image, model digest, CPU identity and placement are null.
+. Compare the source-selected conversion (`ibm-granite/granite-3.2-2b-instruct`, INT4) with the conflicting roster description (3B, bfloat16). Neither establishes the actual loaded artifact.
+. In the profile template, identify the missing source/submodule revisions, dirty state, image digest, policy/rules digests, effective backend, OVMS loaded model/artifact digest, serving device, pod/node placement and CPU vendor evidence reference.
+
+*Blocked live procedure:* the operator must inspect those values in a current full/local deployment and demonstrate real chat completion at `/v3/chat/completions`. A `/v2/health/ready` response or XML file is insufficient.
+Verify Intel CPU placement before making an Intel runtime claim; DNS names and a response alias prove neither location nor hardware.
+Red Hat OpenShift is the intended operating surface, Intel OpenVINO/OVMS the intended serving technology, and IBM supplies Granite. These are no product-support or performance claims.
+
+Provision and warm the pinned local model before the learner clock. Resolve quota/storage and rollout overlap before admission.
+The reviewed profile selects a remote mode despite a local label; it cannot qualify this path.
+Do not substitute remote inference or a saved answer for a failed local load.
+
+== Learner checkpoint
+
+*Pass when:* you mark current model and CPU evidence “uncollected” and can name the evidence that would establish actual local placement. No fixture digest qualifies G03.
+
+Next: xref:02-baseline.adoc[Capture baseline receipts].

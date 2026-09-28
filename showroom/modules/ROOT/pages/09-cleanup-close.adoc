@@ -1,0 +1,38 @@
+= Cleanup and close
+:page-stage-id: 09-cleanup-close
+:page-duration-minutes: 2
+
+include::partial$status.adoc[]
+
+*Minutes 34–36 of 36 · 2 minutes · REHEARSAL*
+
+== Objective
+
+Close the rehearsal honestly and explain the future scoped cleanup requirement.
+
+== Learner actions
+
+. Review all four worksheet cases and six receipt rows, relevant chain checks and the authority explanation. Keep `live_completion: false`.
+. Inspect `cleanup`: status `not_run`, observed residue `null`. No lab environment was provisioned or removed by this package; a fixture cannot prove cleanup.
+. If you created local worksheet/download copies, remove unwanted copies and retain only the sanitized worksheet you intentionally choose to export. Do not delete the shared reference package.
+. Record the export exception by filename and close the learner guide. If you stopped early, record which rehearsal checkpoints remain incomplete.
+
+== Blocked live cleanup procedure
+
+Before provisioning, inventory ownership of namespace, jobs, deployments, services, routes, ConfigMaps, Secrets, PVC/PV and backing NFS directory, session credentials, fault state, local temporary files and port-forward processes.
+Keep shared model/platform resources and neighboring tenants separate.
+After evidence capture: restore scoped fault state, revoke session access, clear UI/cache, stop owned processes, remove only disposable owned resources, wait for deletion, and verify storage reclamation and absence of residue.
+Use idempotent cleanup that fails explicitly while anything owned remains; verify a neighboring-tenant sentinel is unchanged.
+Namespace deletion alone proves neither NFS removal nor credential revocation.
+Never delete individual records from a shared chain to manufacture cleanup; use disposable tenant storage.
+Retention exceptions that leave owned lab data invalidate strict zero-residue acceptance. Zero residue is not a forensic backup-erasure claim.
+
+== Learner checkpoint
+
+*Pass when:* all rehearsal inspection steps are done, local copies are accounted for, and the worksheet says live cleanup was not run.
+Future live completion requires two local completions, an injection denial, policy-unavailable abstention, fresh exact receipts, nonempty valid relevant chains, ownership explanation and verified scoped cleanup, after all G01–G10 release gates pass.
+An error, missing evidence, source switch or timeout clears live completion. At minute 40 record incomplete rather than skipping a gate.
+
+Your rehearsal close: “I inspected examples of two allowed local requests, an injection denial and a policy-unavailable abstention. I traced six illustrative receipts. No live inference, ledger verification or environment cleanup was established. The policy owner owns the rules, the operator owns enforcement and recovery, and the business owner decides the next deployment.”
+
+Return to xref:index.adoc[the journey overview].

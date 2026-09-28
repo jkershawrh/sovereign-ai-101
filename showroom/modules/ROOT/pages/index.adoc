@@ -1,0 +1,60 @@
+= Sovereign AI 101 — Verify Local Inference Governance
+
+include::partial$status.adoc[]
+
+Can we demonstrate local inference whose permission and evidence remain inspectable?
+Use this 36-minute journey to rehearse how to answer that question from four requests.
+The title is a topic, not a sovereignty outcome.
+
+== The bounded claim
+
+After a separately qualified live run, the claim would be: “For these requests, the configured rules and policy controlled access to a locally served Granite model, and the learner inspected the resulting evidence.”
+This package does not establish that claim. Its examples teach general allow, sensitive allow, injection deny and policy-unavailable abstain.
+
+== Start here
+
+. Download the xref:attachment$templates/learner-worksheet.md[sanitized worksheet] and xref:attachment$templates/profile-template.yaml[profile template]. They contain no credentials and request no real sensitive input.
+. Download the xref:attachment$fixtures/journey.rehearsal.json[REHEARSAL evidence bundle] and xref:attachment$fixtures/manifest.json[fixture integrity manifest]. Keep original source labels and scenario times.
+. Follow the ten stages in order. No provisioning or model download is included in learner time.
+
+[cols="1,3,1",options="header"]
+|===
+|Minutes |Stage |Duration
+|0–1 |xref:00-preflight.adoc[Preflight and bounded claim] |1 min
+|1–3 |xref:01-local-evidence.adoc[Inspect local model and CPU evidence] |2 min
+|3–4 |xref:02-baseline.adoc[Capture baseline receipts] |1 min
+|4–9 |xref:03-general-allow.adoc[General allow] |5 min
+|9–14 |xref:04-sensitive-allow.adoc[Sensitive allow] |5 min
+|14–19 |xref:05-injection-deny.adoc[Injection deny] |5 min
+|19–24 |xref:06-policy-abstain.adoc[Policy-unavailable abstain] |5 min
+|24–31 |xref:07-correlate-verify.adoc[Correlate and verify nonempty chains] |7 min
+|31–34 |xref:08-authority.adoc[Explain authority] |3 min
+|34–36 |xref:09-cleanup-close.adoc[Cleanup and close] |2 min
+|===
+
+One bounded retry or a move to a prequalified spare seat may use up to four extra minutes.
+At minute 40, any missing checkpoint means incomplete. Never omit correlation, the failure case or cleanup to fit the clock.
+The presentation and architecture briefing are separate from this 36-minute session.
+
+== What runs where
+
+The source-derived path is browser → demo API `POST /api/route` → deterministic GCL prompt adapter `/v1/chat/completions` → OPA `/v1/data/sovereign/data_residency/allow` and ledger REST gateway → local OVMS `/v3/chat/completions`.
+The ledger gateway bridges REST to gRPC and per-type chains backed by PostgreSQL.
+Edge TLS does not establish encryption on internal HTTP or database connections.
+Granite generates text after authorization in the proposed contract; it does not approve policy or run tools.
+
+== Scope and release boundary
+
+Exclude TDX/attestation, training, synthetic benchmarks, performance comparisons, legal compliance, unsupported sovereignty and certification claims. This package adds no AgnosticV provisioning.
+The source review reports fail-open policy handling, best-effort ledger writes, missing public correlation, model metadata conflicts and unresolved local deployment readiness.
+Every G01–G10 gate must pass in a current disposable environment before live delivery; a content build is not that qualification.
+
+== Source lineage
+
+This package derives from `demo-blueprint.yaml`, `story.brief.yaml`, `docs/sovereign-ai-101-lab-plan.md` and `docs/journey-acceptance-matrix.md` in this repository.
+Their static review was dated 2026-09-28 at lab revision `d58e1f57803a90ae4bcb92f2f0f6cb468989eb2c`.
+The reviewed ledger submodule was dirty; a top-level revision does not attest to deployed images or nested contents.
+The xref:attachment$reference/qualification-boundary.md[qualification boundary and gate index] summarizes the handoff without promoting any gate.
+These fixtures are newly authored teaching material, not newly collected lab evidence or an approved runtime fallback.
+
+Start with xref:00-preflight.adoc[preflight and the bounded claim].

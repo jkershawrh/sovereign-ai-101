@@ -1,0 +1,134 @@
+version: 1
+blueprint: demo-blueprint.yaml
+status: reviewed-story-plan
+presentation:
+  title: Sovereign AI 101 — Verify Local Inference Governance
+  audience: Platform and AI engineers, security reviewers, and technical decision makers
+  desired_decision: Select one workload for a bounded lab that tests inference, policy behavior and evidence completeness.
+  duration_minutes: 6.5
+  core_tension: A useful AI answer does not tell us where it ran, which rule decided, or what was recorded.
+  cta: Inspect this request in the guided lab, then define the evidence your workload needs.
+  framing: A source-backed governance demonstration; sovereignty is the question under examination, not a certified outcome.
+source_material:
+  mode: repository
+  location: /Users/jkershaw/Documents/sovereign-ai-lab
+  revision: d58e1f57803a90ae4bcb92f2f0f6cb468989eb2c
+  source_state: Dirty ledger submodule; exact revisions and excluded dirty file recorded in demo-blueprint.yaml.
+  consequential_assumptions:
+    - Local full-mode OVMS on verified Intel CPU is the live target, not yet observed in this review.
+    - Current endpoint, image/model identity and fresh request evidence must be supplied before live presentation.
+    - No app scene, typed browser adapter or rehearsal fixture was authored by this document-only task.
+architecture:
+  actors: [operator, reviewer]
+  boundaries: [B-input, B-policy, B-model, B-evidence, B-human]
+  critical_flows: [F-inference, F-policy-comparison, F-ledger]
+  reveal_sequence:
+    - 'Who receives the prompt? Demo API constructs the user message.'
+    - 'Who decides? GCL rules classify; OPA evaluates supplied metadata.'
+    - 'Who generates? The configured local Granite/OpenVINO/OVMS endpoint.'
+    - 'What remains to inspect? Ledger entries and chain results, judged by a human.'
+  omitted_from_main_story: [TDX, confidential-computing, model-adaptation, benchmarks, ContextForge, Praxis, MCP, remote-MaaS, autonomous-remediation]
+  partner_roles: Red Hat OpenShift supplies the intended operating surface; Intel OpenVINO/OVMS supplies conversion and serving on the target Intel CPU. Granite is IBM's model. Preserve Red Hat × Intel lockup without product-support or superiority claims.
+beats:
+  - id: opening
+    act: 1
+    beat: ordinary-world-and-stakes
+    seconds: 40
+    scene_intent: sparse opening with internal reveals
+    claim: A good answer is only one part of the evidence.
+    classification: interpretation
+    evidence_ids: [E01, E02, E06]
+    presenter_prompt: Reveal answer, policy decision and evidence record one at a time; ask what each can establish.
+  - id: reframe
+    act: 1
+    beat: reframe
+    seconds: 30
+    scene_intent: one audience decision
+    claim: Verify one request before expanding the claim.
+    classification: interpretation
+    evidence_ids: [E02, E05, E07]
+    presenter_prompt: Introduce local inference, deterministic governance and human review as the bounded 101 question.
+  - id: causal-architecture
+    act: 2
+    beat: system-reveal
+    seconds: 80
+    scene_intent: guided-architecture
+    claim: Generation, policy and evidence have different responsibilities.
+    classification: verified-fact
+    evidence_ids: [E01, E02, E03, E04, E05, E06, E07]
+    flow_ids: [F-inference, F-policy-comparison, F-ledger]
+    presenter_prompt: Ask first, reveal answer second; retain the completed path. Mark the standalone OPA comparison as a separate flow.
+  - id: paired-proof
+    act: 3
+    beat: live-proof
+    seconds: 100
+    scene_intent: live-journey
+    claim: Observe a general prompt and an injection-pattern prompt through the same boundary.
+    classification: live-measurement
+    collection_status: not-collected
+    evidence_ids: [L00, L01, L03]
+    flow_ids: [F-inference, F-ledger]
+    presenter_prompt: Confirm deployment identity; run general then injection. Retain response and fresh matching event for each. Activate a path only when supported by the collected result; internal calls remain source-derived unless directly observed.
+  - id: policy-and-limit
+    act: 3
+    beat: trial-and-mechanism
+    seconds: 75
+    scene_intent: changed-condition with inline explanation
+    claim: OPA can distinguish supplied destinations; this adapter still fails open when OPA is unavailable.
+    classification: verified-fact
+    evidence_ids: [E02, E03, L02, L03]
+    flow_ids: [F-policy-comparison]
+    presenter_prompt: Hold sensitive_personal constant, change local to us-east-1, and inspect explicit booleans. Explain that this is a policy test, not observed egress blocking. Show the sourced outage limitation without disrupting shared infrastructure.
+  - id: payoff-and-handoff
+    act: 4
+    beat: transformation-and-next-journey
+    seconds: 65
+    scene_intent: evidence-payoff and deliberate close
+    claim: We can say exactly what this session established and what remains unproven.
+    classification: interpretation
+    evidence_ids: [L00, L01, L02, L03, L04]
+    presenter_prompt: Verify nonempty relevant chains; build the conclusion from current evidence. Offer one lab handoff with readiness and 36-minute duration plus recovery allowance; until qualified, continue only as instructor-led inspection. Include an explicit Close presentation control.
+evidence:
+  authority: Blueprint evidence catalog E01-E10 defines reviewed source claims; L00-L04 defines uncollected runtime contracts.
+  source_claims: verified-fact means inspected source, not a successful live test.
+  live_claims: Every result carries session_id, case_id where relevant, collection time and LIVE/REHEARSAL/OFFLINE state. Preserve raw responses and matched ledger identifiers.
+  fallback: No approved rehearsal fixture exists yet. If services fail, show OFFLINE and proof not run. Any future fixture must be reviewed and visibly REHEARSAL with provenance; never mix it into a live payoff.
+  metrics: No authored confidence, latency, throughput, cost or benchmark metrics. Fixed classifier confidence is not model quality.
+  inference_limit: A routed_local event precedes the model call; it does not prove successful generation.
+  ledger_limit: Best-effort writes, unsigned caller identity and ambiguous correlation remain visible. Chain integrity does not prove completeness or claim truth.
+live_systems:
+  - {name: Operator runtime inventory, evidence_ids: [L00], readiness: unverified}
+  - {name: 'Demo API /api/route', evidence_ids: [L01], readiness: unverified}
+  - {name: 'Demo API /api/policies/evaluate', evidence_ids: [L02], readiness: unverified}
+  - {name: 'Demo API /api/ledger and /api/ledger/verify', evidence_ids: [L03, L04], readiness: unverified}
+journey:
+  presentation: Six scenes, four acts, 390 seconds; one viewport per desktop reveal.
+  live_demonstration: 5–10 minutes to repeat paired cases and inspect raw source-labeled evidence.
+  guided_demo:
+    duration_minutes: 25
+    destination: Existing lab's inference, data-residency policy and proof-chain inspection surfaces.
+    source_pages:
+      - content/modules/ROOT/pages/04-inference-routing.adoc
+      - content/modules/ROOT/pages/05-policy-enforcement.adoc
+      - content/modules/ROOT/pages/explore-proof-chain.adoc
+    selection: Inference exercises 1–4; policy exercises 1–2; inspect router event types and relevant chains instead of TDX or seven-layer claims.
+    caveat: Guide includes broader claims and direct OPA calls without ledger writes. Instructor must explain those limits; current task leaves guide content unchanged.
+  hands_on_lab:
+    proposed_duration_minutes: 36
+    recovery_allowance_minutes: 4
+    contract: docs/sovereign-ai-101-lab-plan.md
+    acceptance_matrix: docs/journey-acceptance-matrix.md
+    status: future-state; bounded exercise plan, not a certified or provisioned seat
+    outcome: After G01-G10 pass, run general and sensitive allow, injection deny and controlled OPA-unavailable abstain; verify exact fresh receipts and relevant chains, explain human ownership, and complete scoped cleanup.
+    implementation_limit: Abstention, mandatory receipts, completion events and public correlation IDs are future contract features; existing adapter fails open and cannot qualify this lab.
+    evidence_ids: [E08, E11]
+    takeaway: Source revision/dirty state, runtime identities, selected conditions, request/session/correlation IDs, returned receipt hashes, chain result, ownership explanation and cleanup record.
+    continuity: Carry presentation evidence as context; allocate fresh learner IDs and baselines. Provisional marker matching in the current demo is not the future learner correlation contract.
+  state_to_preserve: [session_id, source_revision, source_dirty, source_state, collected_at, selected_conditions, raw_results, entry_ids, entry_hashes, verification_results, unresolved_gaps]
+release_gates:
+  - Blueprint blockers B01-B08 must remain visible; production authority claims require separate hardening and validation.
+  - Verify Intel CPU, effective local OVMS endpoint, model identity and deployed policy before labeling the run live.
+  - Validate actual typed adapter responses and reviewed fixtures; a failed or unrun proof cannot render a success payoff.
+  - Require new matching ledger entries and nonempty relevant chain verification; retain ambiguity instead of guessing.
+  - Resolve deployment path drift and qualify a lab seat before calling the handoff turnkey.
+  - Future scene implementation must preserve keyboard access, reduced motion, source labels and 1920x1080/1440x900 one-viewport layouts.
