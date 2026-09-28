@@ -173,3 +173,17 @@ resource isolation and cluster residue proof remain. F7 additionally needs a
 clean immutable source, scans, SBOMs, signatures, provenance and exact-digest pull
 receipts. No certification, live model execution/placement, policy-engine
 availability, signed ledger, residency or production readiness is established.
+
+## Source-bound immutable release workflow
+
+After a reviewed commit is pushed to the canonical repository, dispatch
+`.github/workflows/release-images.yml` with its full 40-character revision and
+`publish=true`. The workflow refuses revision drift, reruns the complete project
+check, rebuilds both images without cache for Linux AMD64, blocks fixable high or
+critical vulnerabilities, generates SPDX SBOMs, publishes commit-specific GHCR
+images, signs each digest with GitHub OIDC, and emits GitHub provenance
+attestations. Evidence is retained as workflow artifacts for 90 days.
+
+This workflow produces candidate release evidence; it does not assert license
+approval, long-term retention, three rollback releases, destination pullability,
+Launchpad trust, certification, orderability, or promotion eligibility.
