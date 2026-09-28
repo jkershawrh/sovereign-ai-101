@@ -67,13 +67,13 @@ try {
       ...(role === 'presentation' ? ['-e', 'SERVICE_URL=http://rehearsal:8787', '-p', '127.0.0.1::8080'] : []), images[role]]);
     const inspected = JSON.parse(await run(['inspect', name]))[0];
     assert.equal(inspected.HostConfig.ReadonlyRootfs, true); assert.equal(inspected.Config.User, '100123:0');
-    assert.equal(await run(['exec', name, '/nodejs/bin/node', '-e', 'process.stdout.write(String(process.getuid()))']), '100123');
-    await run(['exec', name, '/nodejs/bin/node', '-e', "try { require('fs').writeFileSync('/app/readonly-probe', 'x'); process.exit(1); } catch (e) { if(e.code !== 'EROFS' && e.code !== 'EACCES') process.exit(2); }"]);
+    assert.equal(await run(['exec', name, '/usr/bin/node', '-e', 'process.stdout.write(String(process.getuid()))']), '100123');
+    await run(['exec', name, '/usr/bin/node', '-e', "try { require('fs').writeFileSync('/app/readonly-probe', 'x'); process.exit(1); } catch (e) { if(e.code !== 'EROFS' && e.code !== 'EACCES') process.exit(2); }"]);
     // The final filesystem carries no application dependency tree or credential files.
-    await run(['exec', name, '/nodejs/bin/node', '-e', "const fs=require('fs');const walk=p=>fs.readdirSync(p,{withFileTypes:true}).forEach(e=>{const f=p+'/'+e.name;if(/^\\.env|\\.(pem|key)$|^credentials|^node_modules$/.test(e.name))throw Error('unexpected file');if(e.isDirectory())walk(f)});walk('/app');"]);
+    await run(['exec', name, '/usr/bin/node', '-e', "const fs=require('fs');const walk=p=>fs.readdirSync(p,{withFileTypes:true}).forEach(e=>{const f=p+'/'+e.name;if(/^\\.env|\\.(pem|key)$|^credentials|^node_modules$/.test(e.name))throw Error('unexpected file');if(e.isDirectory())walk(f)});walk('/app');"]);
     let ready = false;
     for (let attempt = 0; attempt < 40 && !interrupted; attempt++) {
-      try { await run(['exec', name, '/nodejs/bin/node', 'packaging/runtime/healthcheck.mjs']); ready = true; break; }
+      try { await run(['exec', name, '/usr/bin/node', 'packaging/runtime/healthcheck.mjs']); ready = true; break; }
       catch { await new Promise(resolve => setTimeout(resolve, 500)); }
     }
     assert.ok(ready, `${role} readiness failed or interrupted`);
@@ -99,7 +99,7 @@ try {
   await run(['restart', `${id}-rehearsal`]);
   let restarted = false;
   for (let attempt = 0; attempt < 40 && !interrupted; attempt++) {
-    try { await run(['exec', `${id}-rehearsal`, '/nodejs/bin/node', 'packaging/runtime/healthcheck.mjs']); restarted = true; break; }
+    try { await run(['exec', `${id}-rehearsal`, '/usr/bin/node', 'packaging/runtime/healthcheck.mjs']); restarted = true; break; }
     catch { await new Promise(resolve => setTimeout(resolve, 500)); }
   }
   assert.ok(restarted);

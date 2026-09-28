@@ -1,6 +1,6 @@
 # Development / REHEARSAL only. Build with --platform linux/amd64.
 ARG NODE_IMAGE=docker.io/library/node@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402
-ARG RUNTIME_IMAGE=gcr.io/distroless/nodejs24-debian13@sha256:7924c53f56526359d0f491c22517306d8d92f1b285656a6094398e2c55bbaeca
+ARG RUNTIME_IMAGE=cgr.dev/chainguard/node@sha256:0d0e3c2b91b1c82c125052fc4dd0fe22294b13e22c5210ebc94955bdfd5fe2d3
 FROM ${NODE_IMAGE} AS build
 WORKDIR /build
 COPY package.json package-lock.json ./
@@ -25,5 +25,5 @@ COPY packaging/runtime/config.mjs packaging/runtime/healthcheck.mjs packaging/ru
 ENV NODE_ENV=production PORT=8080 SOVEREIGN_SOURCE=REHEARSAL DELIVERY_STATUS=development SERVICE_URL=http://rehearsal:8787
 USER 65532:65532
 EXPOSE 8080
-HEALTHCHECK --interval=10s --timeout=4s --start-period=10s --retries=3 CMD ["/nodejs/bin/node", "packaging/runtime/healthcheck.mjs"]
+HEALTHCHECK --interval=10s --timeout=4s --start-period=10s --retries=3 CMD ["/usr/bin/node", "packaging/runtime/healthcheck.mjs"]
 CMD ["packaging/runtime/presentation.mjs"]
