@@ -152,6 +152,7 @@ jobs:
         with:
           subject-name: ${{ matrix.repository }}
           subject-digest: ${{ steps.publish.outputs.digest }}
+          push-to-registry: true
       - name: Retain digest identity
         if: ${{ inputs.publish }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
