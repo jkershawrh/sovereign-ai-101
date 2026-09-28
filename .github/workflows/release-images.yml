@@ -141,22 +141,43 @@ jobs:
       - name: Install Cosign
         if: ${{ inputs.publish }}
         uses: sigstore/cosign-installer@398d4b0eeef1380460a10c8013a76f728fb906ac
-      - name: Sign exact digest with GitHub OIDC
+      - name: Sign and attest exact digest with GitHub OIDC
         if: ${{ inputs.publish }}
         env:
           DIGEST_REF: ${{ steps.publish.outputs.digest_ref }}
-        run: cosign sign --yes "$DIGEST_REF"
-      - name: Attest build provenance
+        shell: bash
+        run: |
+          set -euo pipefail
+          jq -n --arg repository "${{ github.server_url }}/${{ github.repository }}" \
+            --arg revision "${{ inputs.expected_sha }}" --arg image "$DIGEST_REF" \
+            --arg workflow "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            '{source_repository:$repository,source_revision:$revision,subject_image:$image,workflow_run:$workflow,build_platform:"linux/amd64"}' \
+            > provenance-${{ matrix.component }}.json
+          cosign sign --yes "$DIGEST_REF"
+          cosign attest --yes --type spdxjson \
+            --predicate sbom-${{ matrix.component }}.spdx.json "$DIGEST_REF"
+          cosign attest --yes --type custom \
+            --predicate provenance-${{ matrix.component }}.json "$DIGEST_REF"
+      - name: Verify workflow signer and attestations
         if: ${{ inputs.publish }}
-        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be
-        with:
-          subject-name: ${{ matrix.repository }}
-          subject-digest: ${{ steps.publish.outputs.digest }}
-          push-to-registry: true
+        env:
+          DIGEST_REF: ${{ steps.publish.outputs.digest_ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          identity="${{ github.server_url }}/${{ github.repository }}/.github/workflows/release-images.yml@refs/heads/main"
+          issuer="https://token.actions.githubusercontent.com"
+          cosign verify --certificate-identity="$identity" --certificate-oidc-issuer="$issuer" "$DIGEST_REF" >/dev/null
+          cosign verify-attestation --type spdxjson --certificate-identity="$identity" \
+            --certificate-oidc-issuer="$issuer" "$DIGEST_REF" >/dev/null
+          cosign verify-attestation --type custom --certificate-identity="$identity" \
+            --certificate-oidc-issuer="$issuer" "$DIGEST_REF" >/dev/null
       - name: Retain digest identity
         if: ${{ inputs.publish }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: sovereign-ai-101-digest-${{ matrix.component }}-${{ inputs.expected_sha }}
           retention-days: 90
-          path: image-${{ matrix.component }}.txt
+          path: |
+            image-${{ matrix.component }}.txt
+            provenance-${{ matrix.component }}.json
