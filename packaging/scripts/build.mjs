@@ -25,7 +25,7 @@ for (const [role, file] of [['presentation', 'Containerfile'], ['rehearsal', 'Co
   run(engine, ['build', '--no-cache', '--platform', 'linux/amd64', '--format', 'docker', '--build-arg', `SOURCE_REVISION=${revision}`,
     '--build-arg', `SOURCE_DIRTY=${dirty}`, '-f', context + '/' + file, '-t', image, context].filter((x, i, a) => engine === 'podman' || (x !== '--format' && a[i - 1] !== '--format')));
   const inspected = JSON.parse(run(engine, ['image', 'inspect', image], true))[0];
-  if (inspected.Os !== 'linux' || inspected.Architecture !== 'amd64' || inspected.Config.User !== '1001:0' ||
+  if (inspected.Os !== 'linux' || inspected.Architecture !== 'amd64' || inspected.Config.User !== '65532:65532' ||
       inspected.Config.Labels['org.opencontainers.image.revision'] !== revision) throw new Error('Image identity check failed');
   console.log(`${role.toUpperCase()}_IMAGE=${inspected.Id}`);
 }
