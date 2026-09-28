@@ -1,0 +1,14 @@
+{
+  "schema_version": "demo-story.redhat-intel.com/zero-residue/v1",
+  "scope": "local exact-digest container journey",
+  "source_revision": "5d601b46ba3a7d10deff6c2849eb22af2631a8ef",
+  "removed": [
+    "sovereign-ai-101-presentation-handoff container",
+    "sovereign-ai-101-rehearsal-handoff container",
+    "sovereign-ai-101-handoff network"
+  ],
+  "remaining_matching_containers": 0,
+  "remaining_matching_networks": 0,
+  "platform_cleanup_verified": false,
+  "openshift_reclaim": "NOT RUN; independent Launchpad cluster qualification gate"
+}

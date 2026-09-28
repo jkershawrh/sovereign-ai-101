@@ -1,0 +1,30 @@
+{
+  "schema_version": "demo-story.redhat-intel.com/published-release/v1",
+  "evidence_scope": "published_immutable_candidates",
+  "source_revision": "5d601b46ba3a7d10deff6c2849eb22af2631a8ef",
+  "workflow_run": "https://github.com/jkershawrh/sovereign-ai-101/actions/runs/36467674250",
+  "workflow_conclusion": "success",
+  "platform": "linux/amd64",
+  "images": {
+    "rehearsal": "ghcr.io/jkershawrh/sovereign-ai-101-rehearsal@sha256:400e2bdd94e8e2a71a0bee42fbdc2d3a59ad623aff16f140107a79b5dd364895",
+    "presentation": "ghcr.io/jkershawrh/sovereign-ai-101-presentation@sha256:eb4d58c71716d9e1a3f3bd446d9e66a1a2c278ad1fe5696830b51c551c5df91e"
+  },
+  "gates": {
+    "exact_source_checkout": "PASS",
+    "local_project_checks": "PASS",
+    "complete_vulnerability_inventory": "PASS",
+    "zero_high_or_critical": "PASS",
+    "spdx_sbom": "PASS",
+    "exact_digest_pull": "PASS",
+    "oidc_signature": "PASS",
+    "provenance_attestation": "PASS",
+    "sbom_attestation": "PASS",
+    "verification_evidence_retained": "PASS"
+  },
+  "scan_counts": {
+    "rehearsal": {"critical": 0, "high": 0, "medium": 4},
+    "presentation": {"critical": 0, "high": 0, "medium": 4}
+  },
+  "certification": "NOT CLAIMED",
+  "live_openshift_validation": "NOT RUN"
+}

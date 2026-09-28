@@ -1,0 +1,39 @@
+{
+  "schema_version": "demo-story.redhat-intel.com/artifact-release/v1",
+  "evidence_scope": "published_immutable_candidate",
+  "component": "presentation",
+  "source_repository": "https://github.com/jkershawrh/sovereign-ai-101",
+  "source_revision": "5d601b46ba3a7d10deff6c2849eb22af2631a8ef",
+  "image": "ghcr.io/jkershawrh/sovereign-ai-101-presentation@sha256:eb4d58c71716d9e1a3f3bd446d9e66a1a2c278ad1fe5696830b51c551c5df91e",
+  "architecture": "linux/amd64",
+  "workflow": {
+    "run_id": 36467674250,
+    "url": "https://github.com/jkershawrh/sovereign-ai-101/actions/runs/36467674250",
+    "conclusion": "success",
+    "dispatch_source_matched": true
+  },
+  "scan": {
+    "scanner": "Grype",
+    "scope": "complete published inventory",
+    "severity_counts": {"critical": 0, "high": 0, "medium": 4},
+    "hard_gate": "PASS: zero HIGH or CRITICAL findings",
+    "full_report_artifact": "sovereign-ai-101-presentation-5d601b46ba3a7d10deff6c2849eb22af2631a8ef/vulnerability-presentation.json",
+    "full_report_sha256": "b0cb2d13b09d0cb5e8e120380f50826f5ff17a059231b564bb67292beddfc493"
+  },
+  "sbom": {
+    "format": "SPDX 2.3 JSON",
+    "packages": 198,
+    "artifact": "sovereign-ai-101-presentation-5d601b46ba3a7d10deff6c2849eb22af2631a8ef/sbom-presentation.spdx.json",
+    "sha256": "be7632e8534a322c6f037399a99794d27eaa6ca01e80d3f36de5998c0131e3d0"
+  },
+  "supply_chain": {
+    "exact_digest_pull": "PASS",
+    "source_revision_label": "PASS",
+    "oidc_signature_verification": "PASS",
+    "spdx_attestation_verification": "PASS",
+    "provenance_attestation_verification": "PASS"
+  },
+  "retention_days": 90,
+  "certification": "NOT CLAIMED",
+  "live_openshift_validation": "NOT RUN"
+}

@@ -1,0 +1,18 @@
+api_version: launchpad.redhat.com/v1alpha1
+kind: CatalogOnboardingProposal
+metadata:
+  catalog_item_id: sovereign-ai-101
+  status: draft
+spec:
+  repository: https://github.com/jkershawrh/sovereign-ai-101
+  revision: 5d601b46ba3a7d10deff6c2849eb22af2631a8ef
+  learning_level: "101"
+  prerequisite: intel-llm-cpu-serving
+  source_classes:
+    showroom: {playbook: site.yml, start_path: showroom}
+    workload: {deploy_path: deploy/openshift/base}
+  requested_actions: [approve_source, run_discovery]
+  authority:
+    may_modify_catalog: false
+    may_provision: false
+    may_publish: false

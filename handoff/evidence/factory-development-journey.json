@@ -1,0 +1,40 @@
+{
+  "schema_version": "demo-story.redhat-intel.com/factory-development-journey/v1",
+  "source_revision": "5d601b46ba3a7d10deff6c2849eb22af2631a8ef",
+  "method": ["CDD", "TDD", "EDD"],
+  "test_gate": {
+    "status": "PASS",
+    "vitest_tests": 33,
+    "runtime_contract_tests": 14,
+    "showroom_fixture_tests": 30,
+    "packaging_tests": 6,
+    "browser_tests": 12
+  },
+  "artifact_gate": {
+    "status": "PASS_PUBLISHED_CANDIDATE",
+    "architectures": ["linux/amd64"],
+    "exact_digest_pull": "PASS",
+    "published_scan_high": 0,
+    "published_scan_critical": 0
+  },
+  "development_journey": {
+    "status": "PASS_REHEARSAL_ONLY",
+    "conditions": ["allow", "deny", "abstain"],
+    "allow_model_dispatch_count": 1,
+    "deny_model_dispatch_count": 0,
+    "abstain_model_dispatch_count": 0,
+    "chains_valid": true,
+    "session_cleanup_verified": true,
+    "source_state": "REHEARSAL",
+    "live_qualified": false
+  },
+  "resource_snapshot": {
+    "host": "local Podman, Linux AMD64 images under ARM64 emulation",
+    "presentation": {"cpu_percent_snapshot": 49.98, "memory_mb": 78.03, "pids": 11},
+    "rehearsal": {"cpu_percent_snapshot": 39.14, "memory_mb": 63.10, "pids": 7},
+    "pods_or_containers": 2,
+    "measurement_scope": "single post-journey snapshot; Launchpad capacity qualification still required"
+  },
+  "integrated_cluster_gate": "NOT_RUN_IN_FACTORY",
+  "authority": "This receipt grants no catalog, provisioning, certification, promotion, or publication authority."
+}

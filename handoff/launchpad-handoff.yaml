@@ -1,0 +1,114 @@
+schema_version: demo-story.redhat-intel.com/launchpad-handoff/v1
+factory_receipt:
+  identity:
+    catalog_item_id: sovereign-ai-101
+    display_name: "Sovereign AI 101: Understand Governed Inference"
+    proposed_track: sovereign_ai
+    proposed_learning_level: "101"
+  authority:
+    orderable: false
+    certified: false
+    promotion_eligible: false
+    may_modify_launchpad_catalog: false
+    may_provision: false
+    may_publish: false
+  presentation_source:
+    repository: https://github.com/jkershawrh/sovereign-ai-101
+    revision: "5d601b46ba3a7d10deff6c2849eb22af2631a8ef"
+    tree_dirty: false
+  artifacts:
+    workload:
+      image: ghcr.io/jkershawrh/sovereign-ai-101-rehearsal@sha256:400e2bdd94e8e2a71a0bee42fbdc2d3a59ad623aff16f140107a79b5dd364895
+      architecture: linux/amd64
+      source_repository: https://github.com/jkershawrh/sovereign-ai-101
+      source_revision: "5d601b46ba3a7d10deff6c2849eb22af2631a8ef"
+      release_receipt: {path: evidence/published-rehearsal-release.json, sha256: "ae990f899acfd0311be66a554a6dd03123598101d21fd21d8534ea6170cd1503"}
+    presentation:
+      image: ghcr.io/jkershawrh/sovereign-ai-101-presentation@sha256:eb4d58c71716d9e1a3f3bd446d9e66a1a2c278ad1fe5696830b51c551c5df91e
+      architecture: linux/amd64
+      source_repository: https://github.com/jkershawrh/sovereign-ai-101
+      source_revision: "5d601b46ba3a7d10deff6c2849eb22af2631a8ef"
+      release_receipt: {path: evidence/published-presentation-release.json, sha256: "0eafc775b3fbb7f1c7579cd52bea7fd95b79551908ec3bd0bf4a05f57ad2e4cd"}
+    showroom_content:
+      repository: https://github.com/jkershawrh/sovereign-ai-101
+      revision: "5d601b46ba3a7d10deff6c2849eb22af2631a8ef"
+      bundle_digest: "sha256:e76aabcc0e73e740699a5959400399ec872f13f2df85591293532743f3ce94a6"
+  factory_evidence:
+    development_journey: {path: evidence/factory-development-journey.json, sha256: "f9d336b370e672b08461fa056cc211bd2700d990bc9b520760a6be8ea8bd76c1"}
+    presentation_verification: {path: evidence/presentation-verification.json, sha256: "0196c5ae184882c87f51b1a03578ee1f054281bf8257adae8dea251c88792320"}
+    zero_residue: {path: evidence/factory-zero-residue.json, sha256: "b47c6d0654ccc848017718e235f373a6ae7d35994088701e3b771eb50bc2c7b8"}
+    published_release: {path: evidence/published-release.json, sha256: "e8300b5a5e19fc0eff669435f6d1d34614663f0713a7a6f40eaa65e68c080dec"}
+  contracts:
+    demo_blueprint: demo-blueprint.yaml
+    story_brief: story.brief.yaml
+    runtime_contract: contracts/governed-inference.ts
+    runtime_tests: contracts/runtime.node-test.ts
+  known_blockers:
+    - The immutable images and factory journey are REHEARSAL only; no live model or Intel CPU placement is claimed.
+    - OpenShift admission, NetworkPolicy enforcement, Route behavior, and one-seat reclaim remain unverified in a destination cluster.
+    - The single local resource snapshot is not a capacity claim; one, five, and twenty-five-seat qualification remain independent Launchpad gates.
+    - Launchpad source approval, trusted render, artifact review, live seat certification, and promotion remain required.
+proposed_launchpad_intake:
+  api_version: launchpad.redhat.com/v1alpha1
+  catalog:
+    catalog_item_id: sovereign-ai-101
+    display_name: "Sovereign AI 101: Understand Governed Inference"
+    description: "Trace a governed inference request through classification, deterministic policy, advisory model dispatch, evidence receipts, refusal states, and human authority."
+    category: guided_build
+    version: 0.1.0
+    status: draft
+  learning:
+    learning_level: "101"
+    learning_stage: Understand
+    experience_type: guided_foundations
+    prerequisites: [intel-llm-cpu-serving]
+    recommended_next_items: [sovereign-ai-201]
+    journey_role: foundation
+    specialty_family: sovereign_ai
+    branches_from: intel-llm-cpu-serving
+    returns_to: null
+    shared_blueprint: red-hat-intel-sovereign-ai-v1
+    solution_family: sovereign_ai
+  sources:
+    showroom: {repo_url: https://github.com/jkershawrh/sovereign-ai-101, revision: "5d601b46ba3a7d10deff6c2849eb22af2631a8ef", playbook: site.yml, start_path: showroom}
+    workload: {repo_url: https://github.com/jkershawrh/sovereign-ai-101, revision: "5d601b46ba3a7d10deff6c2849eb22af2631a8ef", deploy_path: deploy/openshift/base}
+  runtime:
+    deployment_type: kustomize
+    deployment_class: shared_namespace
+    deployment_scope: participant_namespace
+    supported_architectures: [linux/amd64]
+    supported_openshift_versions: [review-required]
+    required_operators: []
+    required_capabilities: [openshift, showroom]
+    required_models: []
+    exposure_policy: internal
+    ingress: participant-route
+    egress: none
+    cluster_scoped_resources: false
+    cleanup_owner: launchpad-workshop-reclaim
+    workload:
+      deployment_values:
+        workload_image: ghcr.io/jkershawrh/sovereign-ai-101-rehearsal@sha256:400e2bdd94e8e2a71a0bee42fbdc2d3a59ad623aff16f140107a79b5dd364895
+        presentation_image: ghcr.io/jkershawrh/sovereign-ai-101-presentation@sha256:eb4d58c71716d9e1a3f3bd446d9e66a1a2c278ad1fe5696830b51c551c5df91e
+        source_state: REHEARSAL
+    resources:
+      steady_per_seat: {cpu_millicores: 100, memory_mib: 160, pods: 2, storage_gib: 0}
+      peak_per_seat: {cpu_millicores: 500, memory_mib: 256, pods: 2}
+      workshop_shared: {cpu_millicores: 0, memory_mib: 0, pods: 0, storage_gib: 0}
+      provisioning_concurrency: 1
+      observed_largest_run: 1
+      safety_margin_percent: 20
+      measurement_status: LOCAL_SINGLE_RUN_ONLY
+    tabs:
+      - {id: story, title: Story, source: workload.route.ui}
+      - {id: guide, title: Lab Guide, source: showroom.guide}
+      - {id: terminal, title: Terminal, source: showroom.terminal}
+    readiness_checks: [pod-ready, route-accessible, readyz, allow-contract, deny-contract, abstain-contract, chain-verification, session-cleanup]
+  certification_proposal:
+    stage: factory-development-verified
+    max_workshop_seats: 0
+    promotion_sequence: [1, 5, 25]
+    proof_contract_draft: handoff/catalog-certification.proposed.yaml
+    launchpad_evidence_required: [trusted-render-review, artifact-and-destination-qualification, one-seat-live-certification, five-seat-certification, twenty-five-seat-certification, reclaim-zero-residue]
+  requested_pipeline_actions: [approve_source, run_discovery]
+  subsequent_independent_gates: [generate_draft, trusted_render_review, artifact_review, run_one-seat-certification, request_review, scale-certification, promote]
