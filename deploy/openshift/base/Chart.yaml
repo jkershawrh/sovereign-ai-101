@@ -1,0 +1,6 @@
+apiVersion: v2
+name: sovereign-ai-101
+description: Sovereign AI 101 rehearsal seat. Launchpad passes workload_image, presentation_image, and source_state.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
