@@ -10,6 +10,7 @@
     }
   },
   "spec": {
+    "host": "s101.apps.flightpath.fm2aihpcsed.com",
     "to": {
       "kind": "Service",
       "name": "sovereign-presentation"
