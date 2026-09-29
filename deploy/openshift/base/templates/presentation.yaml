@@ -101,6 +101,7 @@ metadata:
   labels:
     {{- include "sovereign.labels" . | nindent 4 }}
 spec:
+  host: {{ printf "s101-%s.%s" (.Release.Namespace | sha256sum | trunc 12) .Values.apps_domain | quote }}
   to:
     kind: Service
     name: sovereign-presentation
