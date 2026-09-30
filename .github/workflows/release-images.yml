@@ -165,7 +165,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          identity="${{ github.server_url }}/${{ github.repository }}/.github/workflows/release-images.yml@refs/heads/main"
+          # Verify the exact workflow identity that GitHub placed in the
+          # keyless certificate. Candidate releases intentionally run from a
+          # reviewed branch before promotion, so hard-coding main rejects a
+          # valid signature while providing no additional identity binding.
+          identity="${{ github.server_url }}/${{ github.workflow_ref }}"
           issuer="https://token.actions.githubusercontent.com"
           cosign verify --certificate-identity="$identity" --certificate-oidc-issuer="$issuer" "$DIGEST_REF" >/dev/null
           cosign verify-attestation --type spdxjson --certificate-identity="$identity" \
