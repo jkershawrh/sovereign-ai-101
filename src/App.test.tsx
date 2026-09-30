@@ -6,9 +6,9 @@ beforeEach(()=>window.history.replaceState(null,'','/'))
 afterEach(()=>vi.unstubAllGlobals())
 describe('Sovereign presentation',()=>{
   it('advances opening internal reveals before changing scenes',()=>{
-    render(<App/>);expect(screen.getByText('A useful answer.')).toBeInTheDocument()
-    fireEvent.keyDown(window,{key:' '});expect(screen.getByText('Who permitted it?')).toBeInTheDocument()
-    fireEvent.keyDown(window,{key:' '});expect(screen.getByText('What can you prove?')).toBeInTheDocument()
+    render(<App/>);expect(screen.getByText('The answer sounds useful.')).toBeInTheDocument()
+    fireEvent.keyDown(window,{key:' '});expect(screen.getByText('Was it permitted?')).toBeInTheDocument()
+    fireEvent.keyDown(window,{key:' '});expect(screen.getByText('Can you prove it?')).toBeInTheDocument()
     expect(new URLSearchParams(location.search).get('scene')).toBe('0')
   })
   it('asks first, reveals only earned boundaries, and supports legacy links',()=>{
@@ -23,14 +23,14 @@ describe('Sovereign presentation',()=>{
   })
   it('does not hijack space on focused buttons or advance a clicked control',()=>{
     render(<App/>);const toggle=screen.getByRole('button',{name:'Toggle presenter prompt'})
-    fireEvent.keyDown(toggle,{key:' '});expect(screen.getByText('A useful answer.')).toBeInTheDocument()
+    fireEvent.keyDown(toggle,{key:' '});expect(screen.getByText('The answer sounds useful.')).toBeInTheDocument()
     fireEvent.click(toggle);expect(screen.getByText('Presenter prompt')).toBeInTheDocument()
-    expect(screen.getByText('A useful answer.')).toBeInTheDocument()
+    expect(screen.getByText('The answer sounds useful.')).toBeInTheDocument()
   })
   it('clamps malformed deep links and exposes fullscreen',()=>{
     history.replaceState(null,'','/?scene=NaN&step=-20')
     Object.defineProperty(document.documentElement,'requestFullscreen',{value:vi.fn(),configurable:true})
-    render(<App/>);expect(screen.getByText('A useful answer.')).toBeInTheDocument()
+    render(<App/>);expect(screen.getByText('The answer sounds useful.')).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button',{name:'Toggle fullscreen'}))
     expect(document.documentElement.requestFullscreen).toHaveBeenCalled()
   })

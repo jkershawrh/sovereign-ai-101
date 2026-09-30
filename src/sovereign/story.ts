@@ -3,8 +3,8 @@ export const brand = {
   partner: { name: 'Intel', logo: '/logos/intel.png', alt: 'Intel' }, attribution: 'Red Hat × Intel',
 }
 export const scenes = [
-  { id: 'opening', title: 'An answer is not the evidence.', seconds: 40, reveals: 3, prompt: '40s · Reveal the answer, the missing policy decision, then the missing record. Ask what each can establish.' },
-  { id: 'reframe', title: 'Verify one request.', seconds: 30, reveals: 1, prompt: '30s · Choose a bounded claim: generation, deterministic governance, recorded evidence and human acceptance have different owners.' },
+  { id: 'opening', title: 'A useful answer is not an approval.', seconds: 40, reveals: 3, prompt: '40s · An employee asks about internal retention policy. Reveal the answer, the missing permission decision, then the missing evidence.' },
+  { id: 'reframe', title: 'Govern one request.', seconds: 30, reveals: 1, prompt: '30s · Frame the learner as the platform reviewer. Classification, policy, generation, evidence and human acceptance have different owners.' },
   { id: 'architecture', title: 'Every boundary has a job.', seconds: 80, reveals: 8, prompt: '80s · Pause on each question, then reveal its answer. This is the reviewed source architecture, not observed deployment. OPA is checked before injection rejection.' },
   { id: 'proof', title: 'Same boundary. Different outcome.', seconds: 100, reveals: 1, prompt: '100s · Connect the rehearsal service or explicitly inspect recorded fixtures. Run general first, step through returned evidence, then run injection. No Granite model is running in rehearsal.' },
   { id: 'policy', title: 'No policy answer. No permission.', seconds: 75, reveals: 2, prompt: '75s · The source adapter fails open. The new rehearsal contract abstains. Change only this session’s policy availability; restore it after the run. A policy test is not proof of geographic residency.' },

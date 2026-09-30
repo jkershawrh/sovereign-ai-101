@@ -13,13 +13,13 @@ async function files(dir) {
   return out
 }
 const pages = (await files(root)).filter(p => p.endsWith('.html'))
-assert.ok(pages.length >= 11, 'missing rendered journey')
+assert.ok(pages.length >= 9, 'missing rendered journey')
 let checked = 0
 const errors = []
 for (const page of pages) {
   const html = await readFile(page, 'utf8')
   if (path.relative(root, page).startsWith(`sovereign-ai-101${path.sep}`)) {
-    for (const text of ['Implemented contract in this package', 'REHEARSAL evidence', 'Blocked live steps']) assert.ok(html.includes(text), `${page}: missing rendered ${text}`)
+    for (const text of ['interactive, deterministic governance service', 'does not call a production model', 'REHEARSAL']) assert.ok(html.includes(text), `${page}: missing rendered ${text}`)
     assert.ok(!html.includes('class="xref unresolved"'), 'unresolved Antora xref')
   }
   for (const [, raw] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {

@@ -1,0 +1,40 @@
+= Make the human decision
+:page-stage-id: 06-decide
+:page-duration-minutes: 3
+
+include::partial$status.adoc[]
+
+== Objective
+
+Turn the technical evidence into a bounded approval decision.
+
+== Why it matters
+
+Sovereign AI is an operating decision, not a product label. The organization still needs people who own policy, platform enforcement, recovery, and workload approval.
+
+== Do it
+
+Review the evidence summary and record the accountable human role.
+
+[source,bash,role="execute"]
+----
+printf '\n=== Evidence summary ===\n'
+for result in general sensitive injection outage; do
+  jq -r '"\(.request_id): class=\(.classification) decision=\(.decision) execution=\(.execution_status) dispatches=\(.model_dispatch_count) evidence=\(.evidence_status)"' \
+    "$HOME/sovereign-ai-101/$result.json"
+done
+
+sed -i 's|- Human owner:.*|- Human owner: policy owner approves rules; platform operator enforces and recovers; business owner approves use|' "$HOME/sovereign-ai-101/decision-brief.md"
+sed -i 's|- Reviewer decision:.*|- Reviewer decision: APPROVE THIS REHEARSAL PATTERN; PRODUCTION REMAINS UNPROVEN|' "$HOME/sovereign-ai-101/decision-brief.md"
+cat "$HOME/sovereign-ai-101/decision-brief.md"
+----
+
+== What happened
+
+You approved a behavior pattern, not a production deployment. The run showed deterministic policy handling and verifiable rehearsal receipts. It did not prove live model identity, Intel CPU placement, geographic residency, production security, or compliance.
+
+== Learner checkpoint
+
+*Pass when:* you can explain this conclusion in one sentence: “Policy decides, generation executes only after permission, evidence records the result, and a human owns approval.”
+
+Next: xref:07-cleanup.adoc[close the session].

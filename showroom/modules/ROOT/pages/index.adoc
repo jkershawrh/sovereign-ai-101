@@ -1,60 +1,55 @@
-= Sovereign AI 101 — Verify Local Inference Governance
+= Sovereign AI 101 — Govern One AI Request
 
 include::partial$status.adoc[]
 
-Can we demonstrate local inference whose permission and evidence remain inspectable?
-Use this 36-minute journey to rehearse how to answer that question from four requests.
-The title is a topic, not a sovereignty outcome.
+== The situation
 
-== The bounded claim
+Your company wants to use an AI assistant with internal information. A useful answer is not enough. Before approving the workload, the platform team must answer four questions:
 
-After a separately qualified live run, the claim would be: “For these requests, the configured rules and policy controlled access to a locally served Granite model, and the learner inspected the resulting evidence.”
-This package does not establish that claim. Its examples teach general allow, sensitive allow, injection deny and policy-unavailable abstain.
+. What kind of request is this?
+. Which policy allowed or blocked it?
+. Did generation actually run?
+. Can another reviewer verify the evidence?
 
-== Start here
+In this lab, you are the platform reviewer. You will send four requests through the same governed boundary and see how the system behaves when the request is ordinary, sensitive, hostile, or impossible to authorize.
 
-. Download the xref:attachment$templates/learner-worksheet.md[sanitized worksheet] and xref:attachment$templates/profile-template.yaml[profile template]. They contain no credentials and request no real sensitive input.
-. Download the xref:attachment$fixtures/journey.rehearsal.json[REHEARSAL evidence bundle] and xref:attachment$fixtures/manifest.json[fixture integrity manifest]. Keep original source labels and scenario times.
-. Follow the ten stages in order. No provisioning or model download is included in learner time.
+== What you will do
 
 [cols="1,3,1",options="header"]
 |===
-|Minutes |Stage |Duration
-|0–1 |xref:00-preflight.adoc[Preflight and bounded claim] |1 min
-|1–3 |xref:01-local-evidence.adoc[Inspect local model and CPU evidence] |2 min
-|3–4 |xref:02-baseline.adoc[Capture baseline receipts] |1 min
-|4–9 |xref:03-general-allow.adoc[General allow] |5 min
-|9–14 |xref:04-sensitive-allow.adoc[Sensitive allow] |5 min
-|14–19 |xref:05-injection-deny.adoc[Injection deny] |5 min
-|19–24 |xref:06-policy-abstain.adoc[Policy-unavailable abstain] |5 min
-|24–31 |xref:07-correlate-verify.adoc[Correlate and verify nonempty chains] |7 min
-|31–34 |xref:08-authority.adoc[Explain authority] |3 min
-|34–36 |xref:09-cleanup-close.adoc[Cleanup and close] |2 min
+|Step |Hands-on outcome |Time
+|1 |Frame the business decision |2 min
+|2 |Create an isolated governed session |3 min
+|3 |Run general and sensitive requests |7 min
+|4 |Prove an injection is blocked before generation |4 min
+|5 |Make policy unavailable and observe fail-closed behavior |4 min
+|6 |Retrieve and verify correlated evidence |5 min
+|7 |Make the human approval decision |3 min
+|8 |Delete the session and local artifacts |2 min
 |===
 
-One bounded retry or a move to a prequalified spare seat may use up to four extra minutes.
-At minute 40, any missing checkpoint means incomplete. Never omit correlation, the failure case or cleanup to fit the clock.
-The presentation and architecture briefing are separate from this 36-minute session.
+You will leave with a small decision brief containing the request classification, policy result, execution status, evidence status, and accountable human role.
 
-== What runs where
+== The architecture you are testing
 
-The source-derived path is browser → demo API `POST /api/route` → deterministic GCL prompt adapter `/v1/chat/completions` → OPA `/v1/data/sovereign/data_residency/allow` and ledger REST gateway → local OVMS `/v3/chat/completions`.
-The ledger gateway bridges REST to gRPC and per-type chains backed by PostgreSQL.
-Edge TLS does not establish encryption on internal HTTP or database connections.
-Granite generates text after authorization in the proposed contract; it does not approve policy or run tools.
+[source,text]
+----
+Participant request
+        |
+        v
+Classification rules --> Policy decision
+        |                     |
+        +-------- allow ------+----> bounded generation
+        |                     |
+        +---- deny/unknown ---+----> no generation
+                              |
+                              v
+                       evidence receipts
+                              |
+                              v
+                         human review
+----
 
-== Scope and release boundary
+The important lesson is separation of duties: policy grants permission, the model produces text, the ledger preserves evidence, and a person accepts or rejects the result.
 
-Exclude TDX/attestation, training, synthetic benchmarks, performance comparisons, legal compliance, unsupported sovereignty and certification claims. This package adds no AgnosticV provisioning.
-The source review reports fail-open policy handling, best-effort ledger writes, missing public correlation, model metadata conflicts and unresolved local deployment readiness.
-Every G01–G10 gate must pass in a current disposable environment before live delivery; a content build is not that qualification.
-
-== Source lineage
-
-This package derives from `demo-blueprint.yaml`, `story.brief.yaml`, `docs/sovereign-ai-101-lab-plan.md` and `docs/journey-acceptance-matrix.md` in this repository.
-Their static review was dated 2026-09-28 at lab revision `d58e1f57803a90ae4bcb92f2f0f6cb468989eb2c`.
-The reviewed ledger submodule was dirty; a top-level revision does not attest to deployed images or nested contents.
-The xref:attachment$reference/qualification-boundary.md[qualification boundary and gate index] summarizes the handoff without promoting any gate.
-These fixtures are newly authored teaching material, not newly collected lab evidence or an approved runtime fallback.
-
-Start with xref:00-preflight.adoc[preflight and the bounded claim].
+Start with xref:00-mission.adoc[your mission].

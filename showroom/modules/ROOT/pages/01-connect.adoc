@@ -1,0 +1,45 @@
+= Open a governed session
+:page-stage-id: 01-connect
+:page-duration-minutes: 3
+
+include::partial$status.adoc[]
+
+== Objective
+
+Create an isolated session and confirm that the governance service is ready.
+
+== Why it matters
+
+Evidence must belong to the current participant and current run. A session boundary prevents another learner's old receipts from being mistaken for yours.
+
+== Do it
+
+Check the service, create a session, and save its short-lived credential only inside your lab home directory.
+
+[source,bash,role="execute"]
+----
+export SOVEREIGN_API_URL="${SOVEREIGN_API_URL:-http://sovereign-rehearsal:8787}"
+curl -sS "$SOVEREIGN_API_URL/readyz" | tee "$HOME/sovereign-ai-101/readiness.json" | jq
+
+SESSION_JSON="$(curl -sS -X POST "$SOVEREIGN_API_URL/api/sessions")"
+export SOVEREIGN_SESSION_TOKEN="$(printf '%s' "$SESSION_JSON" | jq -r '.session_token')"
+export SOVEREIGN_SESSION_ID="$(printf '%s' "$SESSION_JSON" | jq -r '.session_id')"
+
+cat > "$HOME/sovereign-ai-101/session.env" <<EOF
+export SOVEREIGN_API_URL='$SOVEREIGN_API_URL'
+export SOVEREIGN_SESSION_TOKEN='$SOVEREIGN_SESSION_TOKEN'
+export SOVEREIGN_SESSION_ID='$SOVEREIGN_SESSION_ID'
+EOF
+chmod 600 "$HOME/sovereign-ai-101/session.env"
+printf 'Session %s is ready\n' "$SOVEREIGN_SESSION_ID"
+----
+
+== What happened
+
+The service returned `source: REHEARSAL`, a unique session ID, an expiration time, and a bearer token. The token is intentionally omitted from later evidence output.
+
+== Learner checkpoint
+
+*Pass when:* readiness is `true`, the source is `REHEARSAL`, and a unique session ID is printed. Do not paste the token into the decision brief.
+
+Next: xref:02-allow.adoc[route approved requests].

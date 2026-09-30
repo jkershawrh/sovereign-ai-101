@@ -1,7 +1,7 @@
 # Sovereign AI 101 learner assets
 
-The native learning source is `../showroom/modules/ROOT/pages/`. `journey.json` fixes the ten-stage order and 36-minute schedule. This directory owns sanitized templates, a contract-shaped rehearsal bundle, a pinned file digest and the offline validator. Download attachments in Showroom are byte-identical copies.
+The native learning source is `../showroom/modules/ROOT/pages/`. `journey.json` fixes the eight-stage, 30-minute interactive journey. Learners execute against the deterministic in-seat governance service, produce a decision brief, inspect correlated receipts, and delete their session.
 
-The fixture implements a teaching shape, not runtime enforcement. Its 1999/2000 dates are scenario times; `authored_at` is creation time and `collected_at`/`verified_at` stay null. Hashes are illustrative identifiers. No model response or ledger verifier result was collected. Runtime remains blocked on G01–G10. No live-completion mode exists.
+The service and retained fixtures remain visibly `REHEARSAL`: they teach the control pattern but do not establish production model identity, hardware placement, residency, compliance, or live qualification. No live-completion mode exists. The fixture tooling remains as negative-control and packaging evidence; it is no longer the primary learner journey.
 
 Run `node content-101/tools/rehearsal-check.mjs` from the repository root. `--live` must fail. See `../showroom/README.adoc` for the full content/build/link checks. Do not relabel, refresh or mix these fixtures with live evidence.

@@ -1,0 +1,54 @@
+= Close the session
+:page-stage-id: 07-cleanup
+:page-duration-minutes: 2
+
+include::partial$status.adoc[]
+
+== Objective
+
+Delete the server-side session credential and remove temporary evidence from the lab seat.
+
+== Why it matters
+
+Governance includes lifecycle control. A successful request path is incomplete if credentials and participant artifacts are left behind indefinitely.
+
+== Do it
+
+Review the final brief, delete the server-side session, and remove the file containing the bearer token.
+
+[source,bash,role="execute"]
+----
+source "$HOME/sovereign-ai-101/session.env"
+cat "$HOME/sovereign-ai-101/decision-brief.md"
+
+curl -sS -X DELETE "$SOVEREIGN_API_URL/api/session" \
+  -H "Authorization: Bearer $SOVEREIGN_SESSION_TOKEN" \
+  | tee "$HOME/sovereign-ai-101/cleanup.json" | jq
+
+unset SOVEREIGN_SESSION_TOKEN SOVEREIGN_SESSION_ID
+rm -f "$HOME/sovereign-ai-101/session.env"
+jq -e '.session_removed == true' "$HOME/sovereign-ai-101/cleanup.json" >/dev/null \
+  && echo 'PASS: rehearsal session removed and local credential deleted'
+----
+
+== What happened
+
+The in-memory rehearsal session was removed, and the bearer token was deleted from the seat. Launchpad remains responsible for reclaiming the namespace and all platform resources when the lab expires or is reclaimed.
+
+You may keep the sanitized decision brief as your lab takeaway. It contains no token or raw sensitive data.
+
+== Learner checkpoint
+
+*Pass when:* `session_removed` is `true`, the credential file is gone, and you can distinguish application-session cleanup from Launchpad's later namespace reclamation.
+
+== What you can now explain
+
+You have shown that:
+
+* ordinary and sensitive requests can follow different classifications under one policy;
+* a hostile prompt is denied before generation;
+* unavailable policy causes abstention instead of fail-open behavior;
+* exact decision and completion receipts can be correlated and verified; and
+* human ownership remains outside the model.
+
+Return to xref:index.adoc[the journey overview].

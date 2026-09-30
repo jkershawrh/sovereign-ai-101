@@ -1,0 +1,63 @@
+= Verify the evidence
+:page-stage-id: 05-prove
+:page-duration-minutes: 5
+
+include::partial$status.adoc[]
+
+== Objective
+
+Retrieve the exact receipts for one request and verify that their chain is complete and correlated to your session.
+
+== Why it matters
+
+An HTTP response tells you what the API returned. Evidence connects that result to a session, request, decision, execution phase, and verifiable chain.
+
+== Do it
+
+Use the general request's identifiers to retrieve its receipts and verification result.
+
+[source,bash,role="execute"]
+----
+source "$HOME/sovereign-ai-101/session.env"
+export GENERAL_REQUEST_ID="$(jq -r '.request_id' "$HOME/sovereign-ai-101/general.json")"
+export GENERAL_CORRELATION_ID="$(jq -r '.correlation_id' "$HOME/sovereign-ai-101/general.json")"
+SELECTOR="request_id=$GENERAL_REQUEST_ID&correlation_id=$GENERAL_CORRELATION_ID"
+
+curl -sS "$SOVEREIGN_API_URL/api/ledger?$SELECTOR" \
+  -H "Authorization: Bearer $SOVEREIGN_SESSION_TOKEN" \
+  | tee "$HOME/sovereign-ai-101/receipts.json" \
+  | jq '.receipts[] | {entry_type,entry_hash,chain_position,written_ts}'
+
+curl -sS "$SOVEREIGN_API_URL/api/ledger/verify?$SELECTOR" \
+  -H "Authorization: Bearer $SOVEREIGN_SESSION_TOKEN" \
+  | tee "$HOME/sovereign-ai-101/verification.json" \
+  | jq '{all_valid,matched_entry_ids,chains,failure_reason}'
+----
+
+Check that the decision and completion phases are both present and that verification is literal `true`.
+
+[source,bash,role="execute"]
+----
+jq -e '
+  .all_valid == true and
+  .failure_reason == null and
+  (.matched_entry_ids | length) == 2 and
+  ([.chains[].chain_valid] | all)
+' "$HOME/sovereign-ai-101/verification.json" >/dev/null \
+  && echo 'PASS: decision and completion evidence verified' \
+  || { echo 'FAIL: evidence is incomplete'; false; }
+
+sed -i 's|- Evidence verified:.*|- Evidence verified: yes, decision and completion receipts|' "$HOME/sovereign-ai-101/decision-brief.md"
+----
+
+== What happened
+
+The allowed request produced two receipts: one for the policy decision and one for completed generation. The verifier matched both receipts to your request and correlation ID.
+
+Chain integrity proves that the returned records are internally consistent under this rehearsal verifier. It does not prove that the generated answer is true or that the workload is legally compliant.
+
+== Learner checkpoint
+
+*Pass when:* the check prints `PASS`, two receipt phases are visible, every relevant chain is nonempty and valid, and the IDs match your general request.
+
+Next: xref:06-decide.adoc[make the human decision].

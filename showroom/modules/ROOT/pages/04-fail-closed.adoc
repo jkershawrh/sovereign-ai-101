@@ -1,0 +1,57 @@
+= Fail closed when policy is unavailable
+:page-stage-id: 04-fail-closed
+:page-duration-minutes: 4
+
+include::partial$status.adoc[]
+
+== Objective
+
+Observe how the same general request changes when the policy service cannot provide a trustworthy decision.
+
+== Why it matters
+
+An unavailable policy is not permission. A governed system should abstain before generation rather than guess, fail open, or silently bypass the control.
+
+== Do it
+
+Activate a fault only inside your session, run the request, and immediately restore normal policy behavior.
+
+[source,bash,role="execute"]
+----
+source "$HOME/sovereign-ai-101/session.env"
+curl -sS -X PUT "$SOVEREIGN_API_URL/api/session/fault" \
+  -H "Authorization: Bearer $SOVEREIGN_SESSION_TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"fault":"policy_unavailable"}' | jq
+
+export OUTAGE_REQUEST_ID="outage-$(date +%s)"
+HTTP_STATUS="$(curl -sS -o "$HOME/sovereign-ai-101/outage.json" -w '%{http_code}' \
+  -X POST "$SOVEREIGN_API_URL/api/route" \
+  -H "Authorization: Bearer $SOVEREIGN_SESSION_TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d "{\"contract_version\":\"1.0\",\"request_id\":\"$OUTAGE_REQUEST_ID\",\"prompt\":\"What should an organization define before adopting an AI assistant?\",\"max_tokens\":100}")"
+
+curl -sS -X PUT "$SOVEREIGN_API_URL/api/session/fault" \
+  -H "Authorization: Bearer $SOVEREIGN_SESSION_TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d '{"fault":"none"}' >/dev/null
+
+printf 'HTTP %s\n' "$HTTP_STATUS"
+jq '{classification,decision,reason_code,execution_status,model_dispatch_count,evidence_status}' "$HOME/sovereign-ai-101/outage.json"
+----
+
+== What happened
+
+The request stayed classified as `general`, but the result changed from `allow` to `abstain`. HTTP `503` signals that the platform could not safely decide. Generation never started.
+
+[source,bash,role="execute"]
+----
+OUTAGE_SUMMARY="$(jq -r '"\(.decision) / \(.reason_code) / dispatches=\(.model_dispatch_count)"' "$HOME/sovereign-ai-101/outage.json")"
+sed -i "s|- Policy outage:.*|- Policy outage: $OUTAGE_SUMMARY|" "$HOME/sovereign-ai-101/decision-brief.md"
+----
+
+== Learner checkpoint
+
+*Pass when:* the result is `abstain / policy_unavailable`, execution is `not_started`, and dispatch count is zero. Explain the difference between `deny` and `abstain`.
+
+Next: xref:05-prove.adoc[verify the evidence].

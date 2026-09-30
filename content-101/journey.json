@@ -1,69 +1,18 @@
 {
-  "schema_version": "sovereign-ai-101-journey/v1",
-  "mode": "rehearsal-only",
-  "duration_minutes": 36,
-  "recovery_allowance_minutes": 4,
+  "schema_version": "sovereign-ai-101-journey/v2",
+  "mode": "interactive-rehearsal",
+  "duration_minutes": 30,
+  "recovery_allowance_minutes": 5,
   "live_completion": false,
+  "outcome": "The learner executes four governed requests, verifies correlated evidence, records a human decision, and removes the rehearsal session.",
   "stages": [
-    {
-      "id": "00-preflight",
-      "title": "Preflight and bounded claim",
-      "start_minute": 0,
-      "end_minute": 1
-    },
-    {
-      "id": "01-local-evidence",
-      "title": "Inspect local model and CPU evidence",
-      "start_minute": 1,
-      "end_minute": 3
-    },
-    {
-      "id": "02-baseline",
-      "title": "Capture baseline receipts",
-      "start_minute": 3,
-      "end_minute": 4
-    },
-    {
-      "id": "03-general-allow",
-      "title": "General allow",
-      "start_minute": 4,
-      "end_minute": 9
-    },
-    {
-      "id": "04-sensitive-allow",
-      "title": "Sensitive allow",
-      "start_minute": 9,
-      "end_minute": 14
-    },
-    {
-      "id": "05-injection-deny",
-      "title": "Injection deny",
-      "start_minute": 14,
-      "end_minute": 19
-    },
-    {
-      "id": "06-policy-abstain",
-      "title": "Policy-unavailable abstain",
-      "start_minute": 19,
-      "end_minute": 24
-    },
-    {
-      "id": "07-correlate-verify",
-      "title": "Correlate and verify nonempty chains",
-      "start_minute": 24,
-      "end_minute": 31
-    },
-    {
-      "id": "08-authority",
-      "title": "Explain authority",
-      "start_minute": 31,
-      "end_minute": 34
-    },
-    {
-      "id": "09-cleanup-close",
-      "title": "Cleanup and close",
-      "start_minute": 34,
-      "end_minute": 36
-    }
+    {"id": "00-mission", "title": "Your mission", "start_minute": 0, "end_minute": 2},
+    {"id": "01-connect", "title": "Open a governed session", "start_minute": 2, "end_minute": 5},
+    {"id": "02-allow", "title": "Route approved requests", "start_minute": 5, "end_minute": 12},
+    {"id": "03-protect", "title": "Stop prompt injection", "start_minute": 12, "end_minute": 16},
+    {"id": "04-fail-closed", "title": "Fail closed", "start_minute": 16, "end_minute": 20},
+    {"id": "05-prove", "title": "Verify the evidence", "start_minute": 20, "end_minute": 25},
+    {"id": "06-decide", "title": "Make the human decision", "start_minute": 25, "end_minute": 28},
+    {"id": "07-cleanup", "title": "Close the session", "start_minute": 28, "end_minute": 30}
   ]
 }

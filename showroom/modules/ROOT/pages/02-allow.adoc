@@ -1,0 +1,63 @@
+= Route approved requests
+:page-stage-id: 02-allow
+:page-duration-minutes: 7
+
+include::partial$status.adoc[]
+
+== Objective
+
+Compare an ordinary request with a sensitive request that policy still permits on the bounded path.
+
+== Why it matters
+
+Classification and authorization are different decisions. Sensitive data may require a stricter route without being automatically denied.
+
+== Do it
+
+Run the general request.
+
+[source,bash,role="execute"]
+----
+source "$HOME/sovereign-ai-101/session.env"
+export GENERAL_REQUEST_ID="general-$(date +%s)"
+curl -sS -X POST "$SOVEREIGN_API_URL/api/route" \
+  -H "Authorization: Bearer $SOVEREIGN_SESSION_TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d "{\"contract_version\":\"1.0\",\"request_id\":\"$GENERAL_REQUEST_ID\",\"prompt\":\"What should an organization define before adopting an AI assistant?\",\"max_tokens\":100}" \
+  | tee "$HOME/sovereign-ai-101/general.json" \
+  | jq '{classification,decision,reason_code,execution_status,model_dispatch_count,evidence_status,response}'
+----
+
+Now run a fictional sensitive-information question. Do not enter real personal or customer data.
+
+[source,bash,role="execute"]
+----
+source "$HOME/sovereign-ai-101/session.env"
+export SENSITIVE_REQUEST_ID="sensitive-$(date +%s)"
+curl -sS -X POST "$SOVEREIGN_API_URL/api/route" \
+  -H "Authorization: Bearer $SOVEREIGN_SESSION_TOKEN" \
+  -H 'Content-Type: application/json' \
+  -d "{\"contract_version\":\"1.0\",\"request_id\":\"$SENSITIVE_REQUEST_ID\",\"prompt\":\"What are the retention rules for fictional patient health records?\",\"max_tokens\":100}" \
+  | tee "$HOME/sovereign-ai-101/sensitive.json" \
+  | jq '{classification,decision,reason_code,execution_status,model_dispatch_count,evidence_status,response}'
+----
+
+== What happened
+
+Both requests were allowed and completed, but they received different classifications. Each completed request has one policy decision and one bounded generation dispatch.
+
+Update your brief with the two classifications and decisions.
+
+[source,bash,role="execute"]
+----
+GENERAL_SUMMARY="$(jq -r '"\(.classification) / \(.decision) / \(.execution_status)"' "$HOME/sovereign-ai-101/general.json")"
+SENSITIVE_SUMMARY="$(jq -r '"\(.classification) / \(.decision) / \(.execution_status)"' "$HOME/sovereign-ai-101/sensitive.json")"
+sed -i "s|- General request:.*|- General request: $GENERAL_SUMMARY|" "$HOME/sovereign-ai-101/decision-brief.md"
+sed -i "s|- Sensitive request:.*|- Sensitive request: $SENSITIVE_SUMMARY|" "$HOME/sovereign-ai-101/decision-brief.md"
+----
+
+== Learner checkpoint
+
+*Pass when:* `general` and `sensitive-data` are both visible, both decisions are `allow`, and both executions are `completed`. Explain why classification alone does not authorize or deny a request.
+
+Next: xref:03-protect.adoc[stop prompt injection].

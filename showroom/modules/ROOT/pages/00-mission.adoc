@@ -1,0 +1,47 @@
+= Your mission
+:page-stage-id: 00-mission
+:page-duration-minutes: 2
+
+include::partial$status.adoc[]
+
+== Objective
+
+Decide what must be proven before an AI assistant may handle internal information.
+
+== Why it matters
+
+Imagine an employee asks an AI assistant about retention rules for health records. The answer may sound reasonable while the system still cannot explain whether policy allowed the request, where generation occurred, or what evidence was retained.
+
+Your job is not to judge writing quality. Your job is to decide whether the system behaved within a governed boundary.
+
+== Do it
+
+Create a working directory and the decision brief that you will complete during the lab.
+
+[source,bash,role="execute"]
+----
+mkdir -p "$HOME/sovereign-ai-101"
+cat > "$HOME/sovereign-ai-101/decision-brief.md" <<'EOF'
+# Sovereign AI 101 decision brief
+
+- Workload: Internal policy assistant
+- Reviewer decision: PENDING
+- General request:
+- Sensitive request:
+- Injection attempt:
+- Policy outage:
+- Evidence verified:
+- Human owner:
+EOF
+cat "$HOME/sovereign-ai-101/decision-brief.md"
+----
+
+== What happened
+
+You created the artifact that will turn system output into a human decision. This is deliberately separate from the model response.
+
+== Learner checkpoint
+
+*Pass when:* you can name the four separate responsibilities: classification, policy, generation, and evidence. A model answer cannot approve itself.
+
+Next: xref:01-connect.adoc[open a governed session].

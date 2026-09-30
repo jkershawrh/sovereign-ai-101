@@ -7,7 +7,7 @@ export const demoConfig: DemoConfig = {
   acts: [
     { id:'stakes', label:'01', title:'The decision', scenes:[
       { id:'opening', type:'quote', beat:'stakes', title:scenes[0].title, quote:'An answer, a decision and a record establish different things.' },
-      { id:'reframe', type:'reframe', beat:'reframe', title:scenes[1].title, before:'A useful answer', after:'A reviewable request', detail:'Policy decides. Granite generates. Ledger records. People accept.' },
+      { id:'reframe', type:'reframe', beat:'reframe', title:scenes[1].title, before:'A useful answer', after:'A governed request', detail:'Rules classify. Policy decides. Generation follows permission. Evidence supports a human decision.' },
     ] },
     { id:'architecture', label:'02', title:'The boundaries', scenes:[
       { id:'architecture', type:'guided-architecture', beat:'system-reveal', title:scenes[2].title, layers:questions.map((q,i)=>({id:String(i),question:q.question,answer:q.answer,component:q.objects,detail:q.detail})) },
@@ -26,5 +26,5 @@ export const demoConfig: DemoConfig = {
       { id:'payoff', type:'evidence-payoff', beat:'transformation', title:scenes[5].title,adapterIds:[],evidenceFields:[],fallbackLine:'Proof not run.',line1:'Inspect the current session.',line2:'Human acceptance remains separate.' },
     ] },
   ],
-  journeyHandoffs:[{depth:'lab',title:'Sovereign AI 101 guided lab',duration:'36 minutes + 4 recovery',question:'What evidence does your workload need?',technology:'Inference · deterministic policy · exact receipts',instruction:'Carry session evidence as context. G01–G10 pending; instructor-led inspection only until qualified.'}],
+  journeyHandoffs:[{depth:'lab',title:'Sovereign AI 101 guided lab',duration:'30 minutes + 5 recovery',question:'What evidence does your workload need?',technology:'Classification · deterministic policy · exact receipts',instruction:'Execute four governed conditions, verify the evidence, record a decision, and clean up. Production qualification remains separate.'}],
 }
