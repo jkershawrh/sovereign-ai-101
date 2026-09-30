@@ -1,6 +1,6 @@
 # Development / REHEARSAL only. Build with --platform linux/amd64.
 ARG NODE_IMAGE=docker.io/library/node@sha256:0a7108bf6c7bf5de370ffb1a3ed6be93d405b43ff159f681a8d18c0e2bc2e402
-ARG RUNTIME_IMAGE=cgr.dev/chainguard/node@sha256:0d0e3c2b91b1c82c125052fc4dd0fe22294b13e22c5210ebc94955bdfd5fe2d3
+ARG RUNTIME_IMAGE=cgr.dev/chainguard/node@sha256:6f32fc8fbde89a61e7829f7064c71022fe26734e32ea41f7590a2b708229cdef
 FROM ${NODE_IMAGE} AS build
 WORKDIR /build
 COPY package.json package-lock.json ./
