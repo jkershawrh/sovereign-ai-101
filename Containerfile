@@ -19,6 +19,8 @@ LABEL org.opencontainers.image.title="Sovereign AI 101 presentation" \
       io.sovereign.source-dirty="${SOURCE_DIRTY}" \
       io.sovereign.delivery="development" \
       io.sovereign.source="REHEARSAL"
+USER 0
+RUN ["/usr/bin/node", "-e", "require('node:fs').rmSync('/usr/lib/node_modules/npm',{recursive:true,force:true})"]
 WORKDIR /app
 COPY --from=build /build/dist ./dist
 COPY packaging/runtime/config.mjs packaging/runtime/healthcheck.mjs packaging/runtime/presentation.mjs ./packaging/runtime/

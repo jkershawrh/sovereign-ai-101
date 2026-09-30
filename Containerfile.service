@@ -17,6 +17,8 @@ LABEL org.opencontainers.image.title="Sovereign AI 101 governed rehearsal servic
       io.sovereign.source-dirty="${SOURCE_DIRTY}" \
       io.sovereign.delivery="development" \
       io.sovereign.source="REHEARSAL"
+USER 0
+RUN ["/usr/bin/node", "-e", "require('node:fs').rmSync('/usr/lib/node_modules/npm',{recursive:true,force:true})"]
 WORKDIR /app
 COPY --from=build /build/server/dist/server ./server/dist/server
 COPY --from=build /build/server/dist/contracts/governed-inference.js ./server/dist/contracts/governed-inference.js
