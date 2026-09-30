@@ -45,9 +45,9 @@ for (const name of names) {
     const stage = journey.stages.find(stage => name === `${stage.id}.adoc`)
     assert.ok(stage)
     assert.ok(page.includes(`:page-duration-minutes: ${stage.end_minute - stage.start_minute}\n`), `${name}: duration`)
-    for (const heading of ['== Objective', '== Why it matters', '== Do it', '== What happened', '== Learner checkpoint']) {
-      assert.ok(page.includes(heading), `${name}: ${heading}`)
-    }
+    const phases = [...page.matchAll(/^== (Show|Learn|Do|Prove)$/gm)].map(match => match[1])
+    assert.deepEqual(phases, ['Show', 'Learn', 'Do', 'Prove'], `${name}: Show -> Learn -> Do -> Prove`)
+    assert.ok(page.includes('=== Learner checkpoint'), `${name}: learner checkpoint inside proof`)
     const count = [...page.matchAll(/\[source,bash,role="execute"\]/g)].length
     assert.ok(count >= 1, `${name}: executable learner action`)
     executeBlocks += count

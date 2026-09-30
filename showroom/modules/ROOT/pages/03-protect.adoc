@@ -4,15 +4,15 @@
 
 include::partial$status.adoc[]
 
-== Objective
+== Show
 
 Prove that a hostile instruction is denied before the generation stage runs.
 
-== Why it matters
+== Learn
 
 A model-generated refusal is not the same as a platform boundary. The safer signal is that the policy layer denied the request and the model dispatch count remained zero.
 
-== Do it
+== Do
 
 Send a known injection pattern. The HTTP 403 response is expected, so the command preserves and displays its JSON body.
 
@@ -29,7 +29,7 @@ printf 'HTTP %s\n' "$HTTP_STATUS"
 jq '{classification,decision,reason_code,execution_status,model_dispatch_count,evidence_status,response}' "$HOME/sovereign-ai-101/injection.json"
 ----
 
-== What happened
+== Prove
 
 The rules classified the request as `prompt-injection`. Policy returned `deny`, execution stayed `not_started`, and `model_dispatch_count` stayed `0`. No response text was generated.
 
@@ -39,7 +39,7 @@ INJECTION_SUMMARY="$(jq -r '"\(.classification) / \(.decision) / dispatches=\(.m
 sed -i "s|- Injection attempt:.*|- Injection attempt: $INJECTION_SUMMARY|" "$HOME/sovereign-ai-101/decision-brief.md"
 ----
 
-== Learner checkpoint
+=== Learner checkpoint
 
 *Pass when:* you see HTTP `403`, decision `deny`, reason `injection_detected`, no response text, and zero dispatches. That combination is stronger evidence than a polite refusal from a model.
 

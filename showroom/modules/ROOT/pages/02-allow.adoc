@@ -4,15 +4,15 @@
 
 include::partial$status.adoc[]
 
-== Objective
+== Show
 
 Compare an ordinary request with a sensitive request that policy still permits on the bounded path.
 
-== Why it matters
+== Learn
 
 Classification and authorization are different decisions. Sensitive data may require a stricter route without being automatically denied.
 
-== Do it
+== Do
 
 Run the general request.
 
@@ -42,7 +42,7 @@ curl -sS -X POST "$SOVEREIGN_API_URL/api/route" \
   | jq '{classification,decision,reason_code,execution_status,model_dispatch_count,evidence_status,response}'
 ----
 
-== What happened
+== Prove
 
 Both requests were allowed and completed, but they received different classifications. Each completed request has one policy decision and one bounded generation dispatch.
 
@@ -56,7 +56,7 @@ sed -i "s|- General request:.*|- General request: $GENERAL_SUMMARY|" "$HOME/sove
 sed -i "s|- Sensitive request:.*|- Sensitive request: $SENSITIVE_SUMMARY|" "$HOME/sovereign-ai-101/decision-brief.md"
 ----
 
-== Learner checkpoint
+=== Learner checkpoint
 
 *Pass when:* `general` and `sensitive-data` are both visible, both decisions are `allow`, and both executions are `completed`. Explain why classification alone does not authorize or deny a request.
 

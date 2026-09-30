@@ -4,15 +4,15 @@
 
 include::partial$status.adoc[]
 
-== Objective
+== Show
 
 Turn the technical evidence into a bounded approval decision.
 
-== Why it matters
+== Learn
 
 Sovereign AI is an operating decision, not a product label. The organization still needs people who own policy, platform enforcement, recovery, and workload approval.
 
-== Do it
+== Do
 
 Review the evidence summary and record the accountable human role.
 
@@ -29,11 +29,11 @@ sed -i 's|- Reviewer decision:.*|- Reviewer decision: APPROVE THIS REHEARSAL PAT
 cat "$HOME/sovereign-ai-101/decision-brief.md"
 ----
 
-== What happened
+== Prove
 
 You approved a behavior pattern, not a production deployment. The run showed deterministic policy handling and verifiable rehearsal receipts. It did not prove live model identity, Intel CPU placement, geographic residency, production security, or compliance.
 
-== Learner checkpoint
+=== Learner checkpoint
 
 *Pass when:* you can explain this conclusion in one sentence: “Policy decides, generation executes only after permission, evidence records the result, and a human owns approval.”
 

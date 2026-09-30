@@ -4,17 +4,17 @@
 
 include::partial$status.adoc[]
 
-== Objective
+== Show
 
 Decide what must be proven before an AI assistant may handle internal information.
 
-== Why it matters
+== Learn
 
 Imagine an employee asks an AI assistant about retention rules for health records. The answer may sound reasonable while the system still cannot explain whether policy allowed the request, where generation occurred, or what evidence was retained.
 
 Your job is not to judge writing quality. Your job is to decide whether the system behaved within a governed boundary.
 
-== Do it
+== Do
 
 Create a working directory and the decision brief that you will complete during the lab.
 
@@ -36,11 +36,11 @@ EOF
 cat "$HOME/sovereign-ai-101/decision-brief.md"
 ----
 
-== What happened
+== Prove
 
 You created the artifact that will turn system output into a human decision. This is deliberately separate from the model response.
 
-== Learner checkpoint
+=== Learner checkpoint
 
 *Pass when:* you can name the four separate responsibilities: classification, policy, generation, and evidence. A model answer cannot approve itself.
 

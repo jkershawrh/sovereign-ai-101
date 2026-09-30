@@ -4,15 +4,15 @@
 
 include::partial$status.adoc[]
 
-== Objective
+== Show
 
 Delete the server-side session credential and remove temporary evidence from the lab seat.
 
-== Why it matters
+== Learn
 
 Governance includes lifecycle control. A successful request path is incomplete if credentials and participant artifacts are left behind indefinitely.
 
-== Do it
+== Do
 
 Review the final brief, delete the server-side session, and remove the file containing the bearer token.
 
@@ -31,13 +31,13 @@ jq -e '.session_removed == true' "$HOME/sovereign-ai-101/cleanup.json" >/dev/nul
   && echo 'PASS: rehearsal session removed and local credential deleted'
 ----
 
-== What happened
+== Prove
 
 The in-memory rehearsal session was removed, and the bearer token was deleted from the seat. Launchpad remains responsible for reclaiming the namespace and all platform resources when the lab expires or is reclaimed.
 
 You may keep the sanitized decision brief as your lab takeaway. It contains no token or raw sensitive data.
 
-== Learner checkpoint
+=== Learner checkpoint
 
 *Pass when:* `session_removed` is `true`, the credential file is gone, and you can distinguish application-session cleanup from Launchpad's later namespace reclamation.
 

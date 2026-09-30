@@ -4,15 +4,15 @@
 
 include::partial$status.adoc[]
 
-== Objective
+== Show
 
 Create an isolated session and confirm that the governance service is ready.
 
-== Why it matters
+== Learn
 
 Evidence must belong to the current participant and current run. A session boundary prevents another learner's old receipts from being mistaken for yours.
 
-== Do it
+== Do
 
 Check the service, create a session, and save its short-lived credential only inside your lab home directory.
 
@@ -34,11 +34,11 @@ chmod 600 "$HOME/sovereign-ai-101/session.env"
 printf 'Session %s is ready\n' "$SOVEREIGN_SESSION_ID"
 ----
 
-== What happened
+== Prove
 
 The service returned `source: REHEARSAL`, a unique session ID, an expiration time, and a bearer token. The token is intentionally omitted from later evidence output.
 
-== Learner checkpoint
+=== Learner checkpoint
 
 *Pass when:* readiness is `true`, the source is `REHEARSAL`, and a unique session ID is printed. Do not paste the token into the decision brief.
 

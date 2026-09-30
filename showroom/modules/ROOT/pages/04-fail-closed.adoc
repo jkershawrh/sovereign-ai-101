@@ -4,15 +4,15 @@
 
 include::partial$status.adoc[]
 
-== Objective
+== Show
 
 Observe how the same general request changes when the policy service cannot provide a trustworthy decision.
 
-== Why it matters
+== Learn
 
 An unavailable policy is not permission. A governed system should abstain before generation rather than guess, fail open, or silently bypass the control.
 
-== Do it
+== Do
 
 Activate a fault only inside your session, run the request, and immediately restore normal policy behavior.
 
@@ -40,7 +40,7 @@ printf 'HTTP %s\n' "$HTTP_STATUS"
 jq '{classification,decision,reason_code,execution_status,model_dispatch_count,evidence_status}' "$HOME/sovereign-ai-101/outage.json"
 ----
 
-== What happened
+== Prove
 
 The request stayed classified as `general`, but the result changed from `allow` to `abstain`. HTTP `503` signals that the platform could not safely decide. Generation never started.
 
@@ -50,7 +50,7 @@ OUTAGE_SUMMARY="$(jq -r '"\(.decision) / \(.reason_code) / dispatches=\(.model_d
 sed -i "s|- Policy outage:.*|- Policy outage: $OUTAGE_SUMMARY|" "$HOME/sovereign-ai-101/decision-brief.md"
 ----
 
-== Learner checkpoint
+=== Learner checkpoint
 
 *Pass when:* the result is `abstain / policy_unavailable`, execution is `not_started`, and dispatch count is zero. Explain the difference between `deny` and `abstain`.
 
